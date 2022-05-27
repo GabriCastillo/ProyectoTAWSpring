@@ -1,37 +1,35 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
 
 @Entity
 public class Producto {
-    private Long id;
-    private Integer idproducto;
-    private String titulo;
-    private String descripcion;
-    private String urlImagen;
-    private Integer usuarioVendedor;
-    private Integer categoriaIdcategoria;
-    private List<CompradorProducto> compradorProductosByIdproducto;
-    private List<Correo> correosByIdproducto;
-    private List<Correo> correosByIdproducto_0;
-    private Usuario usuarioByUsuarioVendedor;
-    private Categoria categoriaByCategoriaIdcategoria;
-    private List<ProductosFavoritos> productosFavoritosByIdproducto;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "IDPRODUCTO", nullable = false)
+    private Integer idproducto;
+    @Basic
+    @Column(name = "TITULO", nullable = false, length = 45)
+    private String titulo;
+    @Basic
+    @Column(name = "DESCRIPCION", nullable = false, length = 300)
+    private String descripcion;
+    @Basic
+    @Column(name = "URL_IMAGEN", nullable = false, length = 500)
+    private String urlImagen;
+    @Basic
+    @Column(name = "USUARIO_VENDEDOR", nullable = false)
+    private Integer usuarioVendedor;
+    @Basic
+    @Column(name = "CATEGORIA_IDCATEGORIA", nullable = false)
+    private Integer categoriaIdcategoria;
+    @ManyToOne
+    @JoinColumn(name = "USUARIO_VENDEDOR", referencedColumnName = "IDUSUARIO", nullable = false, insertable = false, updatable = false)
+    private Usuario usuarioByUsuarioVendedor;
+    @OneToMany(mappedBy = "productoIdproducto")
+    private Collection<ProductosFavoritos> productosFavoritosByIdproducto;
+
     public Integer getIdproducto() {
         return idproducto;
     }
@@ -40,8 +38,6 @@ public class Producto {
         this.idproducto = idproducto;
     }
 
-    @Basic
-    @Column(name = "TITULO", nullable = false, length = 45)
     public String getTitulo() {
         return titulo;
     }
@@ -50,8 +46,6 @@ public class Producto {
         this.titulo = titulo;
     }
 
-    @Basic
-    @Column(name = "DESCRIPCION", nullable = false, length = 300)
     public String getDescripcion() {
         return descripcion;
     }
@@ -60,8 +54,6 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    @Basic
-    @Column(name = "URL_IMAGEN", nullable = false, length = 500)
     public String getUrlImagen() {
         return urlImagen;
     }
@@ -70,8 +62,6 @@ public class Producto {
         this.urlImagen = urlImagen;
     }
 
-    @Basic
-    @Column(name = "USUARIO_VENDEDOR", nullable = false)
     public Integer getUsuarioVendedor() {
         return usuarioVendedor;
     }
@@ -80,8 +70,6 @@ public class Producto {
         this.usuarioVendedor = usuarioVendedor;
     }
 
-    @Basic
-    @Column(name = "CATEGORIA_IDCATEGORIA", nullable = false)
     public Integer getCategoriaIdcategoria() {
         return categoriaIdcategoria;
     }
@@ -94,44 +82,33 @@ public class Producto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Producto producto = (Producto) o;
-        return Objects.equals(idproducto, producto.idproducto) && Objects.equals(titulo, producto.titulo) && Objects.equals(descripcion, producto.descripcion) && Objects.equals(urlImagen, producto.urlImagen) && Objects.equals(usuarioVendedor, producto.usuarioVendedor) && Objects.equals(categoriaIdcategoria, producto.categoriaIdcategoria);
+
+        if (idproducto != null ? !idproducto.equals(producto.idproducto) : producto.idproducto != null) return false;
+        if (titulo != null ? !titulo.equals(producto.titulo) : producto.titulo != null) return false;
+        if (descripcion != null ? !descripcion.equals(producto.descripcion) : producto.descripcion != null)
+            return false;
+        if (urlImagen != null ? !urlImagen.equals(producto.urlImagen) : producto.urlImagen != null) return false;
+        if (usuarioVendedor != null ? !usuarioVendedor.equals(producto.usuarioVendedor) : producto.usuarioVendedor != null)
+            return false;
+        if (categoriaIdcategoria != null ? !categoriaIdcategoria.equals(producto.categoriaIdcategoria) : producto.categoriaIdcategoria != null)
+            return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idproducto, titulo, descripcion, urlImagen, usuarioVendedor, categoriaIdcategoria);
+        int result = idproducto != null ? idproducto.hashCode() : 0;
+        result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
+        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
+        result = 31 * result + (urlImagen != null ? urlImagen.hashCode() : 0);
+        result = 31 * result + (usuarioVendedor != null ? usuarioVendedor.hashCode() : 0);
+        result = 31 * result + (categoriaIdcategoria != null ? categoriaIdcategoria.hashCode() : 0);
+        return result;
     }
 
-    @OneToMany(mappedBy = "productoByProductoIdproducto")
-    public List<CompradorProducto> getCompradorProductosByIdproducto() {
-        return compradorProductosByIdproducto;
-    }
-
-    public void setCompradorProductosByIdproducto(List<CompradorProducto> compradorProductosByIdproducto) {
-        this.compradorProductosByIdproducto = compradorProductosByIdproducto;
-    }
-
-    @OneToMany(mappedBy = "productoByIdProducto")
-    public List<Correo> getCorreosByIdproducto() {
-        return correosByIdproducto;
-    }
-
-    public void setCorreosByIdproducto(List<Correo> correosByIdproducto) {
-        this.correosByIdproducto = correosByIdproducto;
-    }
-
-    @OneToMany(mappedBy = "productoByIdProducto_0")
-    public List<Correo> getCorreosByIdproducto_0() {
-        return correosByIdproducto_0;
-    }
-
-    public void setCorreosByIdproducto_0(List<Correo> correosByIdproducto_0) {
-        this.correosByIdproducto_0 = correosByIdproducto_0;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "USUARIO_VENDEDOR", referencedColumnName = "IDUSUARIO", nullable = false)
     public Usuario getUsuarioByUsuarioVendedor() {
         return usuarioByUsuarioVendedor;
     }
@@ -140,22 +117,11 @@ public class Producto {
         this.usuarioByUsuarioVendedor = usuarioByUsuarioVendedor;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "CATEGORIA_IDCATEGORIA", referencedColumnName = "ID_CATEGORIA", nullable = false)
-    public Categoria getCategoriaByCategoriaIdcategoria() {
-        return categoriaByCategoriaIdcategoria;
-    }
-
-    public void setCategoriaByCategoriaIdcategoria(Categoria categoriaByCategoriaIdcategoria) {
-        this.categoriaByCategoriaIdcategoria = categoriaByCategoriaIdcategoria;
-    }
-
-    @OneToMany(mappedBy = "productoByProductoIdproducto")
-    public List<ProductosFavoritos> getProductosFavoritosByIdproducto() {
+    public Collection<ProductosFavoritos> getProductosFavoritosByIdproducto() {
         return productosFavoritosByIdproducto;
     }
 
-    public void setProductosFavoritosByIdproducto(List<ProductosFavoritos> productosFavoritosByIdproducto) {
+    public void setProductosFavoritosByIdproducto(Collection<ProductosFavoritos> productosFavoritosByIdproducto) {
         this.productosFavoritosByIdproducto = productosFavoritosByIdproducto;
     }
 }

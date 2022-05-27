@@ -1,28 +1,20 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
 
 @Entity
 public class Categoria {
-    private Long id;
-    private Integer idCategoria;
-    private String tipo;
-    private List<Producto> productosByIdCategoria;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_CATEGORIA", nullable = false)
+    private Integer idCategoria;
+    @Basic
+    @Column(name = "TIPO", nullable = false, length = 45)
+    private String tipo;
+    @OneToMany(mappedBy = "categoriaIdcategoria")
+    private Collection<Producto> productosByIdCategoria;
+
     public Integer getIdCategoria() {
         return idCategoria;
     }
@@ -31,8 +23,6 @@ public class Categoria {
         this.idCategoria = idCategoria;
     }
 
-    @Basic
-    @Column(name = "TIPO", nullable = false, length = 45)
     public String getTipo() {
         return tipo;
     }
@@ -45,21 +35,28 @@ public class Categoria {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Categoria categoria = (Categoria) o;
-        return Objects.equals(idCategoria, categoria.idCategoria) && Objects.equals(tipo, categoria.tipo);
+
+        if (idCategoria != null ? !idCategoria.equals(categoria.idCategoria) : categoria.idCategoria != null)
+            return false;
+        if (tipo != null ? !tipo.equals(categoria.tipo) : categoria.tipo != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCategoria, tipo);
+        int result = idCategoria != null ? idCategoria.hashCode() : 0;
+        result = 31 * result + (tipo != null ? tipo.hashCode() : 0);
+        return result;
     }
 
-    @OneToMany(mappedBy = "categoriaByCategoriaIdcategoria")
-    public List<Producto> getProductosByIdCategoria() {
+    public Collection<Producto> getProductosByIdCategoria() {
         return productosByIdCategoria;
     }
 
-    public void setProductosByIdCategoria(List<Producto> productosByIdCategoria) {
+    public void setProductosByIdCategoria(Collection<Producto> productosByIdCategoria) {
         this.productosByIdCategoria = productosByIdCategoria;
     }
 }

@@ -1,28 +1,20 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
+import java.util.Collection;
 
 @Entity
 public class Rol {
-    private Long id;
-    private Integer idRol;
-    private String nombre;
-    private List<Usuario> usuariosByIdRol;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_ROL", nullable = false)
+    private Integer idRol;
+    @Basic
+    @Column(name = "NOMBRE", nullable = false, length = 45)
+    private String nombre;
+    @OneToMany(mappedBy = "rolIdrol")
+    private Collection<Usuario> usuariosByIdRol;
+
     public Integer getIdRol() {
         return idRol;
     }
@@ -31,8 +23,6 @@ public class Rol {
         this.idRol = idRol;
     }
 
-    @Basic
-    @Column(name = "NOMBRE", nullable = false, length = 45)
     public String getNombre() {
         return nombre;
     }
@@ -45,21 +35,27 @@ public class Rol {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Rol rol = (Rol) o;
-        return Objects.equals(idRol, rol.idRol) && Objects.equals(nombre, rol.nombre);
+
+        if (idRol != null ? !idRol.equals(rol.idRol) : rol.idRol != null) return false;
+        if (nombre != null ? !nombre.equals(rol.nombre) : rol.nombre != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idRol, nombre);
+        int result = idRol != null ? idRol.hashCode() : 0;
+        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
+        return result;
     }
 
-    @OneToMany(mappedBy = "rolByRolIdrol")
-    public List<Usuario> getUsuariosByIdRol() {
+    public Collection<Usuario> getUsuariosByIdRol() {
         return usuariosByIdRol;
     }
 
-    public void setUsuariosByIdRol(List<Usuario> usuariosByIdRol) {
+    public void setUsuariosByIdRol(Collection<Usuario> usuariosByIdRol) {
         this.usuariosByIdRol = usuariosByIdRol;
     }
 }
