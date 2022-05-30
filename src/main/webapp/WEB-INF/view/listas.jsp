@@ -36,6 +36,8 @@
     <input type="submit" value="Filtrar" />
 </form>
 
+<br>
+
 <%
     List<Lista> listas = (List)request.getAttribute("nombresListas");
     if (listas == null || listas.isEmpty()) {
@@ -64,7 +66,7 @@
     %>
     <tr>
         <td><%= lista.getNombre()%></td>
-        <td><a href="">BORRAR</a></td>
+        <td><a href="/marketing/<%= lista.getNombre() %>/borrarLista">BORRAR</a></td>
         <td><a href="">EDITAR</a></td>
     </tr>
 
@@ -75,7 +77,10 @@
 <%
     }
 %>
-<form action="">
+
+<br>
+
+<form method="POST" action="/marketing/crearLista">
     <input type="text" size="12" name="nombreLista" value="" />
     <input type="submit" value="Crear lista" />
 </form>

@@ -32,31 +32,4 @@ public class UsuarioController {
                 return null;
         }
     }
-/*
-    @GetMapping("/{id}/edit")
-    public String doEditar (@PathVariable("id") Integer customerID,
-                            Model model) {
-        Customer cliente = this.customerRepository.findById(customerID).orElse(null);
-        List<MicroMarket> listaSupers = this.microMarketRepository.findAll();
-        model.addAttribute("cliente", cliente.toDTO());
-        model.addAttribute("supermercados", listaSupers);
-        return "cliente";
-    }
-
-    @GetMapping("/{id}/delete")
-    public String doBorrar (@PathVariable("id") Integer customerID) {
-        this.customerRepository.deleteById(customerID);
-        return "redirect:/customer/";
-    }
-
-    @PostMapping("/save")
-    public String doGuardar (@ModelAttribute("cliente") CustomerDTO cliente) {
-        Customer clienteEntidad = new Customer(cliente);
-        MicroMarket mm = this.microMarketRepository.getById(cliente.getSupermercadoId());
-        clienteEntidad.setMicroMarketByZip(mm);
-        //this.customerRepository.save(clienteEntidad); !! No funciona porque hay que añadir el código de descuento
-        return "redirect:/customer/";
-    }
-
-*/
 }

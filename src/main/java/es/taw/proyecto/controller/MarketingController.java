@@ -96,4 +96,21 @@ public class MarketingController {
 
         return "listas";
     }
+
+    @PostMapping("/crearLista")
+    public String doGuardar (@RequestParam("nombreLista") String nombreLista) {
+        if((nombreLista != null) && !nombreLista.equals("")){
+            Lista lista = new Lista();
+            lista.setNombre(nombreLista);
+            this.listaRepository.save(lista);
+        }
+
+        return "redirect:/marketing/";
+    }
+
+    @GetMapping("/{nombreListaBorrar}/borrarLista")
+    public String doBorrar (@PathVariable("nombreListaBorrar") String nombreListaBorrar) {
+        this.listaRepository.deleteListaByNombre(nombreListaBorrar);
+        return "redirect:/marketing/";
+    }
 }
