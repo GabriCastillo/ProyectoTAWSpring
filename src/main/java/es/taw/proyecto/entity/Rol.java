@@ -1,5 +1,7 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.RolDTO;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -58,4 +60,13 @@ public class Rol {
     public void setUsuariosByIdRol(Collection<Usuario> usuariosByIdRol) {
         this.usuariosByIdRol = usuariosByIdRol;
     }
+
+    public RolDTO toDTO() {
+        RolDTO dto = new RolDTO();
+
+        dto.setIdRol(idRol);
+        dto.setNombre(nombre);
+
+        return dto;
+}
 }
