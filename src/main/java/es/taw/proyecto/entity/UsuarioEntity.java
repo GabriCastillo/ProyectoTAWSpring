@@ -1,5 +1,7 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.UsuarioDTO;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -31,6 +33,13 @@ public class UsuarioEntity {
     @Basic
     @Column(name = "PASSWORD",nullable = false,length = 45)
     private String password;
+
+    public UsuarioEntity(UsuarioDTO usuario) {
+    }
+
+    public UsuarioEntity() {
+
+    }
 
     public int getIdusuario() {
         return idusuario;
@@ -107,5 +116,10 @@ public class UsuarioEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idusuario, nombre, apellido, domicilio, ciudadResidencia, edad, sexo, password);
+    }
+
+    public UsuarioDTO toDTO(){
+
+        return null;
     }
 }
