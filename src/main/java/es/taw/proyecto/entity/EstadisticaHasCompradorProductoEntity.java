@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "estadistica_has_comprador_producto", schema = "proyectotaw", catalog = "")
+@Table(name = "estadistica_has_comprador_producto", schema = "proyectotaw")
 @IdClass(EstadisticaHasCompradorProductoEntityPK.class)
 public class EstadisticaHasCompradorProductoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
