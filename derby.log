@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Wed Jun 01 20:21:08 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-207f-fecb-000005d8a7b0 
-on database directory memory:D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\ProyectoTAWSpring\ProyectoTAWSpring\1eb63e92-dc5a-4670-bee2-c47adafabc25 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
-Loaded from file:/C:/Users/casti/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Amazon.com Inc.
-java.runtime.version=1.8.0_332-b08
+Wed Jun 01 18:58:03 UTC 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0181-20a1-c4a0-0000076086f0 
+on database directory D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\ProyectoTAWSpring\ProyectoTAWSpring\TAW with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
+Loaded from file:/C:/Users/casti/AppData/Roaming/JetBrains/IntelliJIdea2020.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=11.0.9.1+11-b1145.77
 user.dir=D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\ProyectoTAWSpring\ProyectoTAWSpring
 os.name=Windows 10
 os.arch=amd64
