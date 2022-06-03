@@ -33,8 +33,6 @@ public class LoginController {
 
     @PostMapping("/autentica")
     public String doAutentica (Model model, HttpSession session, @RequestParam("usuario") String user, @RequestParam("clave") String password) {
-        String goTo = "login";
-
         UsuarioDTO usuario = this.usuarioService.comprobarCredenciales(user, password);
         session.setAttribute("usuario", usuario);
 
@@ -49,11 +47,11 @@ public class LoginController {
                 case 3:
                     return null;
                 case 4:
-                    goTo = "redirect:/marketing/";
+                    return "redirect:/marketing/";
             }
         }
 
-        return goTo;
+        return "login";
     }
 
     @GetMapping("/salir")

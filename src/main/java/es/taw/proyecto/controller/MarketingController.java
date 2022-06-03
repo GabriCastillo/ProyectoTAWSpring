@@ -56,9 +56,9 @@ public class MarketingController {
         model.addAttribute("nombresListas", nombresListas);
 
         List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll));
-        List<CategoriaDTO> categoriasUltimas = this.categoriaService.listarCategoriasUltimas(compradores);
-
         model.addAttribute("usuarios", compradores);
+
+        List<CategoriaDTO> categoriasUltimas = this.categoriaService.listarCategoriasUltimas(compradores);
         model.addAttribute("categoriasUltimas", categoriasUltimas);
 
         return "listas";
@@ -72,7 +72,7 @@ public class MarketingController {
 
     @GetMapping("/{nombreListaBorrar}/borrarLista")
     public String doBorrarLista (@PathVariable("nombreListaBorrar") String nombreListaBorrar) {
-        this.listaService.borrarLista(nombreListaBorrar);
+        this.listaService.borrarListas(nombreListaBorrar);
         return "redirect:/marketing/";
     }
 }

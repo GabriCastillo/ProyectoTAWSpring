@@ -3,6 +3,7 @@ package es.taw.proyecto.service;
 import es.taw.proyecto.dao.CategoriaRepository;
 import es.taw.proyecto.dao.CompradorProductoRepository;
 import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.ListaDTO;
 import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.Categoria;
 import es.taw.proyecto.entity.CompradorProducto;
@@ -57,4 +58,18 @@ public class CategoriaService {
 
         return null;
     }
+
+    public List<CategoriaDTO> listarCategoriasUltimasLista (List<ListaDTO> listas) {
+        if((listas != null) && (listas.get(0).getUsuarioByUsuarioLista() != null)) {
+            List<UsuarioDTO> compradores = new ArrayList<>();
+            for(ListaDTO lista : listas) {
+                compradores.add(lista.getUsuarioByUsuarioLista().toDTO());
+            }
+            return this.listarCategoriasUltimas(compradores);
+        }
+
+        return null;
+    }
+
+
 }

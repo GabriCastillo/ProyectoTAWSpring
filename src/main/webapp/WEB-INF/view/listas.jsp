@@ -66,7 +66,7 @@
     <tr>
         <td><%= lista.getNombre()%></td>
         <td><a href="/marketing/<%= lista.getNombre() %>/borrarLista">BORRAR</a></td>
-        <td><a href="">EDITAR</a></td>
+        <td><a href="/lista/<%= lista.getNombre() %>/">EDITAR</a></td>
     </tr>
 
     <%
