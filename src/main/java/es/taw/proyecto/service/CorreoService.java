@@ -3,6 +3,7 @@ package es.taw.proyecto.service;
 import es.taw.proyecto.dao.*;
 import es.taw.proyecto.dto.CorreoDTO;
 import es.taw.proyecto.entity.Correo;
+import es.taw.proyecto.entity.Lista;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class CorreoService {
     protected CorreoRepository correoRepository;
     protected UsuarioRepository usuarioRepository;
     protected ProductoRepository productoRepository;
+    protected ListaRepository listaRepository;
 
     @Autowired
     public void setCompradorProductoRepository(CompradorProductoRepository compradorProductoRepository) {
@@ -40,6 +42,11 @@ public class CorreoService {
     @Autowired
     public void setProductoRepository(ProductoRepository productoRepository) {
         this.productoRepository = productoRepository;
+    }
+
+    @Autowired
+    public void setListaRepository(ListaRepository listaRepository) {
+        this.listaRepository = listaRepository;
     }
 
     public List<CorreoDTO> toDTO (List<Correo> correos) {
@@ -74,6 +81,28 @@ public class CorreoService {
         }
 
         this.correoRepository.save(correo);
+    }
+
+    public void crearCorreoLista (String listaNombre, String mensaje, Integer productoID) {
+        List<Lista> listas = this.listaRepository.findListaByNombre(listaNombre);
+
+        if(listas.get(0).getUsuarioByUsuarioLista() != null) {
+            for(Lista lista : listas) {
+                Correo correo = new Correo();
+
+                correo.setIdUsuario(lista.getUsuarioLista());
+                correo.setUsuarioByIdUsuario(lista.getUsuarioByUsuarioLista());
+
+                correo.setMensaje(mensaje);
+
+                if(productoID != 0) {
+                    correo.setIdProducto(productoID);
+                    correo.setProductoByIdProducto(this.productoRepository.findById(productoID).orElse(null));
+                }
+
+                this.correoRepository.save(correo);
+            }
+        }
     }
 
     public void borrarCorreo (Integer correoID) {

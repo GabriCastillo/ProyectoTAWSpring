@@ -97,8 +97,7 @@
 
         <br>
 
-        <form id="promocionForm" method="post" action="">
-            <input type="hidden" name="nombreListaPromo" value="<%= compradoresLista.get(0).getNombre() %>" />
+        <form id="promocionForm" method="post" action="/lista/<%= compradoresLista.get(0).getNombre() %>/crearCorreoLista">
             <textarea required name="mensajePromo" rows="4" cols="50" form="promocionForm" value=""></textarea><br/>
             <select name="productoSeleccionado">
                 <option selected value="0">Incluir un producto...</option>

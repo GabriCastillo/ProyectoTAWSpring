@@ -95,4 +95,10 @@ public class ListaController {
         this.listaService.borrarLista(listaID);
         return "redirect:/lista/" + listaNombre + "/";
     }
+
+    @PostMapping("/{listaNombre}/crearCorreoLista")
+    public String doCrearCorreoLista (@PathVariable("listaNombre") String listaNombre, @RequestParam("mensajePromo") String mensajePromo, @RequestParam("productoSeleccionado") Integer productoSeleccionado) {
+        this.correoService.crearCorreoLista(listaNombre, mensajePromo, productoSeleccionado);
+        return "redirect:/lista/" + listaNombre + "/";
+    }
 }

@@ -84,7 +84,7 @@ public class CorreoController {
     }
 
     @GetMapping("/{correoID}/borrarCorreo")
-    public String doCrearCorreo (@PathVariable("correoID") Integer correoID) {
+    public String doBorrarCorreo (@PathVariable("correoID") Integer correoID) {
         Integer usuarioID = this.correoService.obtenerUsuarioID(correoID);
         this.correoService.borrarCorreo(correoID);
         return "redirect:/correo/" + usuarioID + "/";
