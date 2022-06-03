@@ -1,16 +1,13 @@
 ----------------------------------------------------------------
-Mon May 30 00:57:44 CEST 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-120a-287c-0000023cbcd0 
-on database directory memory:C:\Users\capta\IdeaProjects\ProyectoTAWSpring\9b4e7023-8a2b-474d-8acb-69b9caed851d with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
-Loaded from file:/C:/Users/capta/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=17.0.2+8-LTS-86
-user.dir=C:\Users\capta\IdeaProjects\ProyectoTAWSpring
+Fri Jun 03 15:10:34 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-29b0-61df-00000a965dd8 
+on database directory memory:D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\ProyectoTAWSpring\ProyectoTAWSpring\59d98989-1c63-4cb2-85fa-6c3235555578 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/casti/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Amazon.com Inc.
+java.runtime.version=1.8.0_332-b08
+user.dir=D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\ProyectoTAWSpring\ProyectoTAWSpring
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Mon May 30 01:03:35 CEST 2022:
-Shutting down instance a816c00e-0181-120a-287c-0000023cbcd0 on database directory memory:C:\Users\capta\IdeaProjects\ProyectoTAWSpring\9b4e7023-8a2b-474d-8acb-69b9caed851d with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
