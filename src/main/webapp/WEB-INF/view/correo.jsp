@@ -50,7 +50,7 @@
         <%    
                     }
         %>
-                <td><a href="">BORRAR</a></td>
+                <td><a href="/correo/<%= correo.getIdpromo() %>/borrarCorreo">BORRAR</a></td>
             </tr>
         <%
                 }
@@ -58,10 +58,9 @@
         </table>
         <%
             }
-        %>     
-        <form id="promocionForm" method="post" action="">
-            <input type="hidden" name="idUsuario" value="<%= request.getAttribute("idUsuario") %>" />
-            <input type="hidden" name="nombreUsuario" value="<%= request.getAttribute("nombreUsuario") %>" />
+        %>
+        <br>
+        <form id="promocionForm" method="post" action="/correo/<%= request.getAttribute("usuarioID") %>/crearCorreo">
             <textarea required name="mensajePromo" rows="4" cols="50" form="promocionForm"></textarea><br/>
             <select name="productoSeleccionado">
                 <option selected value="0">Incluir un producto...</option>

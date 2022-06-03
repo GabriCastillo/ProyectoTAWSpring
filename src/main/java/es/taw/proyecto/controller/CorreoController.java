@@ -76,4 +76,17 @@ public class CorreoController {
 
         return "correo";
     }
+
+    @PostMapping("/{usuarioID}/crearCorreo")
+    public String doCrearCorreo (@PathVariable("usuarioID") Integer usuarioID, @RequestParam("mensajePromo") String mensajePromo, @RequestParam("productoSeleccionado") Integer productoSeleccionado) {
+        this.correoService.crearCorreo(usuarioID, mensajePromo, productoSeleccionado);
+        return "redirect:/correo/" + usuarioID + "/";
+    }
+
+    @GetMapping("/{correoID}/borrarCorreo")
+    public String doCrearCorreo (@PathVariable("correoID") Integer correoID) {
+        Integer usuarioID = this.correoService.obtenerUsuarioID(correoID);
+        this.correoService.borrarCorreo(correoID);
+        return "redirect:/correo/" + usuarioID + "/";
+    }
 }

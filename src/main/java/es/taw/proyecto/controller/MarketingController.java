@@ -75,10 +75,4 @@ public class MarketingController {
         this.listaService.borrarLista(nombreListaBorrar);
         return "redirect:/marketing/";
     }
-
-    @GetMapping("/{usuarioID}/editarCorreo")
-    public String goToCorreo (@PathVariable("usuarioID") Integer usuarioID) {
-
-        return "redirect:/correo/";
-    }
 }
