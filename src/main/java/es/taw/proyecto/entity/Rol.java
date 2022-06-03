@@ -62,11 +62,11 @@ public class Rol {
     }
 
     public RolDTO toDTO() {
-        RolDTO dto = new RolDTO();
+        RolDTO DTO = new RolDTO();
 
-        dto.setIdRol(idRol);
-        dto.setNombre(nombre);
+        DTO.setIdRol(idRol);
+        DTO.setNombre(nombre);
 
-        return dto;
+        return DTO;
 }
 }

@@ -143,17 +143,18 @@ public class Usuario {
     }
 
     public UsuarioDTO toDTO() {
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setIdusuario(idusuario);
-        dto.setRolIdrol(rolIdrol);
-        dto.setNombre(nombre);
-        dto.setPassword(password);
-        dto.setApellido(apellido);
-        dto.setCiudadResidencia(ciudadResidencia);
-        dto.setDomicilio(domicilio);
-        dto.setEdad(edad);
-        dto.setSexo(sexo);
+        UsuarioDTO DTO = new UsuarioDTO();
 
-        return dto;
+        DTO.setIdusuario(idusuario);
+        DTO.setRolIdrol(rolIdrol);
+        DTO.setNombre(nombre);
+        DTO.setPassword(password);
+        DTO.setApellido(apellido);
+        DTO.setCiudadResidencia(ciudadResidencia);
+        DTO.setDomicilio(domicilio);
+        DTO.setEdad(edad);
+        DTO.setSexo(sexo);
+
+        return DTO;
     }
 }

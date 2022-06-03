@@ -1,7 +1,9 @@
 package es.taw.proyecto.controller;
 
 import es.taw.proyecto.dao.UsuarioRepository;
+import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.Usuario;
+import es.taw.proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +15,15 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
-    protected UsuarioRepository usuarioRepository;
+    protected UsuarioService usuarioService;
 
-    public UsuarioRepository getUsuarioRepository() {
-        return this.usuarioRepository;
+    public UsuarioService getUsuarioService() {
+        return this.usuarioService;
     }
 
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public void setUsuarioService(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping("/")
@@ -31,14 +33,24 @@ public class LoginController {
 
     @PostMapping("/autentica")
     public String doAutentica (Model model, HttpSession session, @RequestParam("usuario") String user, @RequestParam("clave") String password) {
-        String goTo = "redirect:/usuario/";
+        String goTo = "login";
 
-        Usuario usuario = this.usuarioRepository.findUsuarioByNombreAndPassword(user, password);
+        UsuarioDTO usuario = this.usuarioService.comprobarCredenciales(user, password);
         session.setAttribute("usuario", usuario);
 
         if (usuario == null) {
             model.addAttribute("error", "usuario o contraseña incorrectos");
-            goTo = "login";
+        } else {
+            switch (usuario.getRolIdrol()) {
+                case 1:
+                    return null;
+                case 2:
+                    return null;
+                case 3:
+                    return null;
+                case 4:
+                    goTo = "redirect:/marketing/";
+            }
         }
 
         return goTo;
@@ -49,5 +61,4 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
     }
-
 }

@@ -4,113 +4,81 @@ import es.taw.proyecto.dao.CategoriaRepository;
 import es.taw.proyecto.dao.CompradorProductoRepository;
 import es.taw.proyecto.dao.ListaRepository;
 import es.taw.proyecto.dao.UsuarioRepository;
+import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.ListaDTO;
 import es.taw.proyecto.dto.UsuarioDTO;
-import es.taw.proyecto.entity.Categoria;
-import es.taw.proyecto.entity.CompradorProducto;
-import es.taw.proyecto.entity.Lista;
-import es.taw.proyecto.entity.Usuario;
+import es.taw.proyecto.service.CategoriaService;
+import es.taw.proyecto.service.ListaService;
+import es.taw.proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("marketing")
 public class MarketingController {
-    protected ListaRepository listaRepository;
-    protected CompradorProductoRepository compradorProductoRepository;
-    protected UsuarioRepository usuarioRepository;
-    protected CategoriaRepository categoriaRepository;
+    protected ListaService listaService;
+    protected UsuarioService usuarioService;
+    protected CategoriaService categoriaService;
 
-
-    public ListaRepository getListaRepository() {
-        return this.listaRepository;
+    public UsuarioService getUsuarioService() {
+        return this.usuarioService;
     }
 
     @Autowired
-    public void setListaRepository(ListaRepository listaRepository) {
-        this.listaRepository = listaRepository;
+    public void setUsuarioService(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
-    public CompradorProductoRepository getCompradorProductoRepository() {
-        return this.compradorProductoRepository;
-    }
-
-    @Autowired
-    public void setCompradorProductoRepository(CompradorProductoRepository compradorProductoRepository) {
-        this.compradorProductoRepository = compradorProductoRepository;
-    }
-
-    public UsuarioRepository getUsuarioRepository() {
-        return this.usuarioRepository;
+    public CategoriaService getCategoriaService() {
+        return this.categoriaService;
     }
 
     @Autowired
-    public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public void setCategoriaService(CategoriaService categoriaService) {
+        this.categoriaService = categoriaService;
     }
 
-    public CategoriaRepository getCategoriaRepository() {
-        return this.categoriaRepository;
+    public ListaService getListaService() {
+        return this.listaService;
     }
 
     @Autowired
-    public void setCategoriaRepository(CategoriaRepository categoriaRepository) {
-        this.categoriaRepository = categoriaRepository;
+    public void setListaService(ListaService listaService) {
+        this.listaService = listaService;
     }
 
     @GetMapping("/")
     public String doListar (Model model, @RequestParam(value = "filtroListaAll", required = false) String filtroListaAll, @RequestParam(value = "filtroCompradorAll", required = false) String filtroCompradorAll) {
-        List<Lista> nombresListas = new ArrayList<>();
-        if((filtroListaAll == null) || filtroListaAll.equals("")) {
-            nombresListas = this.listaRepository.findAll();
-        } else {
-            nombresListas = this.listaRepository.findListaByNombre(filtroListaAll);
-        }
+        List<ListaDTO> nombresListas = this.listaService.listarListas(filtroListaAll);
         model.addAttribute("nombresListas", nombresListas);
 
-        List<Usuario> usuarios;
-        List<CompradorProducto> compradoresProductos = this.compradorProductoRepository.findAll();
-        List<UsuarioDTO> compradores = new ArrayList<>();
-        List<Categoria> ultimasCategorias = new ArrayList<>();
-        if((filtroCompradorAll == null) || filtroCompradorAll.equals("")) {
-            usuarios = this.usuarioRepository.findAll();
-        } else {
-            usuarios = this.usuarioRepository.findUsuarioByNombre(filtroCompradorAll);
-        }
-        for(Usuario usuario : usuarios) {
-            for(CompradorProducto compradorProducto : compradoresProductos) {
-                if((compradorProducto.getUsuarioComprador() != null) && compradorProducto.getUsuarioComprador().equals(usuario.getIdusuario())) {
-                    if(!compradores.contains(usuario.toDTO())) {
-                        compradores.add(usuario.toDTO());
-                        ultimasCategorias.add(this.categoriaRepository.findById(compradorProducto.getProductoByProductoIdproducto().getCategoriaIdcategoria()).orElse(null));
-                    }
-                }
-            }
-        }
+        List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll));
+        List<CategoriaDTO> categoriasUltimas = this.categoriaService.listarCategoriasUltimas(compradores);
+
         model.addAttribute("usuarios", compradores);
-        model.addAttribute("ultimasCategorias", ultimasCategorias);
+        model.addAttribute("categoriasUltimas", categoriasUltimas);
 
         return "listas";
     }
 
     @PostMapping("/crearLista")
-    public String doGuardar (@RequestParam("nombreLista") String nombreLista) {
-        if((nombreLista != null) && !nombreLista.equals("")){
-            Lista lista = new Lista();
-            lista.setNombre(nombreLista);
-            this.listaRepository.save(lista);
-        }
-
+    public String doCrearLista (@RequestParam("nombreLista") String nombreLista) {
+        this.listaService.crearLista(nombreLista);
         return "redirect:/marketing/";
     }
 
     @GetMapping("/{nombreListaBorrar}/borrarLista")
-    public String doBorrar (@PathVariable("nombreListaBorrar") String nombreListaBorrar) {
-        this.listaRepository.deleteListaByNombre(nombreListaBorrar);
+    public String doBorrarLista (@PathVariable("nombreListaBorrar") String nombreListaBorrar) {
+        this.listaService.borrarLista(nombreListaBorrar);
         return "redirect:/marketing/";
+    }
+
+    @GetMapping("/{usuarioID}/editarCorreo")
+    public String goToCorreo (@PathVariable("usuarioID") Integer usuarioID) {
+
+        return "redirect:/correo/";
     }
 }

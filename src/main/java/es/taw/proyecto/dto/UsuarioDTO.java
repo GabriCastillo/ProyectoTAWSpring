@@ -78,7 +78,6 @@ public class UsuarioDTO {
         this.sexo = sexo;
     }
 
-
     public Integer getRolIdrol() {
         return rolIdrol;
     }

@@ -1,5 +1,7 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.CategoriaDTO;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -58,5 +60,14 @@ public class Categoria {
 
     public void setProductosByIdCategoria(Collection<Producto> productosByIdCategoria) {
         this.productosByIdCategoria = productosByIdCategoria;
+    }
+
+    public CategoriaDTO toDTO() {
+        CategoriaDTO DTO = new CategoriaDTO();
+
+        DTO.setIdCategoria(this.idCategoria);
+        DTO.setTipo(this.tipo);
+
+        return DTO;
     }
 }

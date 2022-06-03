@@ -1,5 +1,8 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.CorreoDTO;
+
 import javax.persistence.*;
 
 @Entity
@@ -94,5 +97,18 @@ public class Correo {
 
     public void setProductoByIdProducto(Producto productoByIdProducto) {
         this.productoByIdProducto = productoByIdProducto;
+    }
+
+    public CorreoDTO toDTO() {
+        CorreoDTO DTO = new CorreoDTO();
+
+        DTO.setIdpromo(this.idpromo);
+        DTO.setMensaje(this.mensaje);
+        DTO.setIdUsuario(this.idUsuario);
+        DTO.setIdProducto(this.idProducto);
+        DTO.setUsuarioByIdUsuario(this.usuarioByIdUsuario);
+        DTO.setProductoByIdProducto(this.productoByIdProducto);
+
+        return DTO;
     }
 }
