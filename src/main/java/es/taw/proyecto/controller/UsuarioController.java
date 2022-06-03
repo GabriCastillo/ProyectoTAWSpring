@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("user")
 public class UsuarioController {
-
+/*
     private UsuarioRepository usuarioRepository;
     private RolRepository rolRepository;
 
@@ -67,10 +66,10 @@ public class UsuarioController {
     @PostMapping("/save")
     public String doGuardar (@ModelAttribute("usuario") UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
-        usuarioEntity.setMicroMarketByZip(mm);
+        //usuarioEntity.setMicroMarketByZip(mm);
         //this.customerRepository.save(clienteEntidad); !! No funciona porque hay que añadir el código de descuento
         return "redirect:/usuario/";
     }
-
+*/
 
 }
