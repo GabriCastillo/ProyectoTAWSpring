@@ -3,8 +3,6 @@ package es.taw.proyecto.controller;
 import es.taw.proyecto.dao.RolRepository;
 import es.taw.proyecto.dao.UsuarioRepository;
 import es.taw.proyecto.dto.UsuarioDTO;
-import es.taw.proyecto.entity.RolEntity;
-import es.taw.proyecto.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
