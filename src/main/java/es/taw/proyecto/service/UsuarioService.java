@@ -1,11 +1,14 @@
+/*
+    User: Javier
+    Percentage: 100%
+ */
+
 package es.taw.proyecto.service;
 
 import es.taw.proyecto.dao.CompradorProductoRepository;
 import es.taw.proyecto.dao.UsuarioRepository;
-import es.taw.proyecto.dto.ListaDTO;
 import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.CompradorProducto;
-import es.taw.proyecto.entity.Lista;
 import es.taw.proyecto.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

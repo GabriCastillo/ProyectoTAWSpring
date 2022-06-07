@@ -1,10 +1,5 @@
 package es.taw.proyecto.dto;
 
-import es.taw.proyecto.entity.Producto;
-
-import javax.persistence.*;
-import java.util.Collection;
-
 public class CategoriaDTO {
     private Integer idCategoria;
     private String tipo;

@@ -3,8 +3,6 @@ package es.taw.proyecto.dto;
 import es.taw.proyecto.entity.Producto;
 import es.taw.proyecto.entity.Usuario;
 
-import javax.persistence.*;
-
 public class CorreoDTO {
     private Integer idpromo;
     private String mensaje;

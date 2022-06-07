@@ -1,15 +1,13 @@
 <%--
-    Document   : usuarios
-    Author     : Javier
-    Done       : 100%
+    User: Javier
+    Percentage: 100%
 --%>
-
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page import="es.taw.proyecto.dto.UsuarioDTO" %>
 <%@ page import="es.taw.proyecto.dto.ListaDTO" %>
 <%@ page import="es.taw.proyecto.dto.CategoriaDTO" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>

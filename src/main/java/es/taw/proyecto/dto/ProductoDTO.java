@@ -1,10 +1,6 @@
 package es.taw.proyecto.dto;
 
-import es.taw.proyecto.entity.ProductosFavoritos;
 import es.taw.proyecto.entity.Usuario;
-
-import javax.persistence.*;
-import java.util.Collection;
 
 public class ProductoDTO {
     private Integer idproducto;

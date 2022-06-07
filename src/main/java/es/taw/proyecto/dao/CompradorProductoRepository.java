@@ -1,3 +1,8 @@
+/*
+    User: Javier
+    Percentage: 100%
+ */
+
 package es.taw.proyecto.dao;
 
 import es.taw.proyecto.entity.CompradorProducto;

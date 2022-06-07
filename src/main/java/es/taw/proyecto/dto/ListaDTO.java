@@ -2,8 +2,6 @@ package es.taw.proyecto.dto;
 
 import es.taw.proyecto.entity.Usuario;
 
-import javax.persistence.*;
-
 public class ListaDTO {
     private Integer idLista;
     private String nombre;

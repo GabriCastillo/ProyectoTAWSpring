@@ -1,9 +1,10 @@
+/*
+    User: Javier
+    Percentage: 100%
+ */
+
 package es.taw.proyecto.controller;
 
-import es.taw.proyecto.dao.CategoriaRepository;
-import es.taw.proyecto.dao.CompradorProductoRepository;
-import es.taw.proyecto.dao.ListaRepository;
-import es.taw.proyecto.dao.UsuarioRepository;
 import es.taw.proyecto.dto.CategoriaDTO;
 import es.taw.proyecto.dto.ListaDTO;
 import es.taw.proyecto.dto.UsuarioDTO;

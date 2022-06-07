@@ -1,9 +1,12 @@
-<%@ page import="es.taw.proyecto.entity.Usuario" %>
-<%@page import="java.util.List"%>
+<%--
+    User: Javier
+    Percentage: 100%
+--%>
+<%@ page import="java.util.List" %>
 <%@ page import="es.taw.proyecto.dto.CorreoDTO" %>
 <%@ page import="es.taw.proyecto.dto.ProductoDTO" %>
 <%@ page import="es.taw.proyecto.dto.UsuarioDTO" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
