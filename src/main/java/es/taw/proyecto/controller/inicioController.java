@@ -8,6 +8,6 @@ public class inicioController {
 
     @GetMapping("/")
     public String doInit(){
-        return "entrada";
+        return "login";
     }
 }
