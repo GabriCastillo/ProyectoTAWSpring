@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
     Author     : casti
     Done       : 100
@@ -16,7 +17,6 @@
     <title>Producto</title>
 </head>
 <%
-    List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
     List<UsuarioDTO> listaUsuarios = (List) request.getAttribute("usuarios");
     ProductoDTO producto = (ProductoDTO) request.getAttribute("producto");
 
@@ -25,31 +25,32 @@
 
 <body>
 <jsp:include page="/WEB-INF/view/cabecera.jsp" />
+<h1>Datos del Producto</h1>
+
 <section id="formulario2">
 
-    <h1>Datos del Producto</h1>
     <form:form method="POST" action="/administrador/producto/save" modelAttribute="producto">
         <div style="display:flex">
             <div class="izqBox" style="width: 50%;margin-bottom: 15px">
                 <form:input type="hidden" path="idproducto" name="id"/>
 
                 <div class="input-container ic1">
-                    <form:input id="titulo" class="input" type="text" path="titulo" required oninvalid="this.setCustomValidity('Pon el titulo')"
+                    <form:input id="titulo" class="input" type="text" path="titulo" required="on" oninvalid="this.setCustomValidity('Pon el titulo')"
                            oninput="this.setCustomValidity('')"/>
                     <div class="cut"></div>
                     <label for="titulo" class="placeholder">Titulo</label>
                 </div>
 
                 <div class="input-container ic2" >
-                            <form:textarea  id="descripcion"  class="input" type="text" style="width:70%; height:130px;" path="descripcion" required oninvalid="this.setCustomValidity('Pon la descripcion')"
-                                       oninput="this.setCustomValidity('')"/><%=producto.getDescripcion()%></textarea>
+                            <form:textarea  id="descripcion" name="descripcion" class="input" type="text" style="width:70%; height:130px;" path="descripcion" required="on" oninvalid="this.setCustomValidity('Pon la descripcion')"
+                                       oninput="this.setCustomValidity('')"/></textarea>
                     <div class="cut2"></div>
                     <label for="descripcion" class="placeholder">Descripcion</label>
                 </div>
             </div>
             <div class="dBox">
                 <div class="input-container ic1" >
-                    <form:input id="url" class="input" type="text" name="url" value="<%= producto == null ? "" : producto.getUrlImagen() %>" required oninvalid="this.setCustomValidity('Pon la url de la imagen')"
+                    <form:input id="url" class="input" type="text" name="url" path="urlImagen" required="on" oninvalid="this.setCustomValidity('Pon la url de la imagen')"
                            oninput="this.setCustomValidity('')"/>
                     <div class="cut3"></div>
                     <label for="url" class="placeholder">Selecciona la imagen:</label>
@@ -57,39 +58,19 @@
 
 
                 <div class="input-container ic2">
-                    <select id="categoria" class="input" name="categoria" placeholder=" ">
-                        <%
-                            for (CategoriaDTO c : listaCategorias) {
-                                String selected = "";
-                                if (producto != null && producto.getCategoriaIdcategoria().equals(c)) {
-                                    selected = "selected";
-                                }
-                        %>
-                        <option <%= selected%> value="<%= String.valueOf(c.getIdCategoria())%>"><%= c.getTipo()%></option>
-                        <%
-                            }
-                        %>
 
-                    </select>
+                    <form:select path="categoriaIdcategoria" id="categoria" class="input" name="categoria">
+                        <form:options items="${categorias}" itemLabel="tipo" itemValue="idCategoria"/>
+                    </form:select>
                     <div class="cut2"></div>
                     <label for="categoria" class="placeholder">Categoria</label>
                 </div>
 
                 <div class="input-container ic2">
-                    <select id="idUsuario" class="input" name="idUsuario" placeholder=" ">
-                        <%
-                            for (UsuarioDTO u : listaUsuarios) {
-                                String selected = "";
-                                if (producto != null && producto.getUsuarioVendedor().equals(u)) {
-                                    selected = "selected";
-                                }
-                        %>
-                        <option <%= selected%> value="<%= String.valueOf(u.getIdusuario())%>"><%= u.getNombre()%></option>
-                        <%
-                            }
-                        %>
+                    <form:select path="usuarioVendedor" id="idUsuario" class="input" name="idUsuario">
+                        <form:options items="${usuarios}" itemLabel="nombre" itemValue="idusuario"/>
+                    </form:select>
 
-                    </select>
                     <div class="cut2"></div>
                     <label for="idUsuario" class="placeholder">Dueño</label>
                 </div>

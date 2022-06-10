@@ -138,10 +138,18 @@ public class Producto {
         DTO.setUrlImagen(this.urlImagen);
         DTO.setUsuarioVendedor(this.usuarioVendedor);
         DTO.setCategoriaIdcategoria(this.categoriaIdcategoria);
-        DTO.setUsuarioByUsuarioVendedor(this.usuarioByUsuarioVendedor);
+        DTO.setUsuarioByUsuarioVendedor(this.usuarioByUsuarioVendedor.toDTO());
 
         return DTO;
     }
 
 
+    public void edit(ProductoDTO productoDTO) {
+        this.setIdproducto(productoDTO.getIdproducto());
+        this.setTitulo(productoDTO.getTitulo());
+        this.setDescripcion(productoDTO.getDescripcion());
+        this.setUrlImagen(productoDTO.getDescripcion());
+        this.setUsuarioVendedor(productoDTO.getUsuarioVendedor());
+        this.setCategoriaIdcategoria(productoDTO.getCategoriaIdcategoria());
+    }
 }

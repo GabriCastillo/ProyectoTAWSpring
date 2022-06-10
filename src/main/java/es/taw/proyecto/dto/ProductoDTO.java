@@ -9,8 +9,10 @@ public class ProductoDTO {
     private String urlImagen;
     private Integer usuarioVendedor;
     private Integer categoriaIdcategoria;
-    private Usuario usuarioByUsuarioVendedor;
+    private UsuarioDTO usuarioByUsuarioVendedor;
     private CategoriaDTO categoriaDTO;
+
+
 
     public CategoriaDTO getCategoriaDTO() {
         return categoriaDTO;
@@ -68,11 +70,11 @@ public class ProductoDTO {
         this.categoriaIdcategoria = categoriaIdcategoria;
     }
 
-    public Usuario getUsuarioByUsuarioVendedor() {
+    public UsuarioDTO getUsuarioByUsuarioVendedor() {
         return usuarioByUsuarioVendedor;
     }
 
-    public void setUsuarioByUsuarioVendedor(Usuario usuarioByUsuarioVendedor) {
+    public void setUsuarioByUsuarioVendedor(UsuarioDTO usuarioByUsuarioVendedor) {
         this.usuarioByUsuarioVendedor = usuarioByUsuarioVendedor;
     }
 }

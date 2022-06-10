@@ -74,7 +74,7 @@ public class ProductoService {
         if (!titulo) {
             productoList = this.productoRepository.findAll();
         } else {
-            productoList = this.productoRepository.findProductosByTitulo(filtroTitulo);
+            productoList = this.productoRepository.findBySimilarTitulo(filtroTitulo);
         }
         return this.toDTO(productoList);
     }
@@ -100,5 +100,16 @@ public class ProductoService {
 
         productoDTO.setCategoriaDTO(this.categoriaRepository.findByIdCategoria(productoDTO.getCategoriaIdcategoria()).toDTO());
         return productoDTO;
+    }
+
+    public void save(ProductoDTO productoDTO) {
+        Producto producto = new Producto();
+        producto.edit(productoDTO);
+        this.productoRepository.save(producto);
+    }
+
+    public void borrar(int parseInt) {
+        Producto producto = this.productoRepository.findProductoByIdproducto(parseInt);
+        this.productoRepository.delete(producto);
     }
 }

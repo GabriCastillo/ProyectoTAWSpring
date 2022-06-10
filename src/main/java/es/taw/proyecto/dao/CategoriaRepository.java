@@ -1,7 +1,10 @@
 package es.taw.proyecto.dao;
 
 import es.taw.proyecto.entity.Categoria;
+import es.taw.proyecto.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,5 +15,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
     Categoria findByIdCategoria(Integer c);
 
     List<Categoria> findCategoriasByTipo(String t);
+
+    @Query("SELECT c FROM Categoria  c WHERE c.tipo LIKE CONCAT('%', :tipo, '%')")
+    List<Categoria> findBySimilarTipo(@Param("tipo") String t);
 
 }

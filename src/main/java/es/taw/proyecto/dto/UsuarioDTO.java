@@ -1,5 +1,7 @@
 package es.taw.proyecto.dto;
 
+import es.taw.proyecto.entity.Usuario;
+
 public class UsuarioDTO {
 
     private Integer idusuario;
@@ -94,6 +96,22 @@ public class UsuarioDTO {
 
     public void setRolIdrol(Integer rolIdrol) {
         this.rolIdrol = rolIdrol;
+    }
+
+    public Usuario toEntity() {
+        Usuario entity = new Usuario();
+
+        entity.setIdusuario(idusuario);
+        entity.setRolIdrol(rolIdrol);
+        entity.setNombre(nombre);
+        entity.setPassword(password);
+        entity.setApellido(apellido);
+        entity.setCiudadResidencia(ciudadResidencia);
+        entity.setDomicilio(domicilio);
+        entity.setEdad(edad);
+        entity.setSexo(sexo);
+
+        return entity;
     }
 
 }

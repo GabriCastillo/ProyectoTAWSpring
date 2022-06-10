@@ -80,7 +80,7 @@ public class CategoriaService {
         if (!titulo) {
             categoria = this.categoriaRepository.findAll();
         } else {
-            categoria = this.categoriaRepository.findCategoriasByTipo(tipo);
+            categoria = this.categoriaRepository.findBySimilarTipo(tipo);
         }
         return this.toDTO(categoria);
     }

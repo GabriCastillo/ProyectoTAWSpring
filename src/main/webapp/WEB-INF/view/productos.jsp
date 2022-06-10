@@ -16,7 +16,7 @@
 
 <h1>Listado de productos</h1>
 
-<form method="get" action="administrador/productos">
+<form method="get" action="/administrador/productos">
     Titulo: <input type="text" name="filtroTitulo" value="" />
     <input type="submit" value="Filtrar" />
 </form>
@@ -40,6 +40,7 @@
         <th>Descripcion</th>
         <th>Imagen</th>
         <th>Categoria</th>
+        <th>Vendedor</th>
         <th></th>
         <th></th>
     </tr>
@@ -57,8 +58,8 @@
                      alt="<%= producto.getUrlImagen()%>" width="200" height="200">
             </div>
         </td>
-        <!--<td><%= producto.getCategoriaIdcategoria()%></td>-->
-        <td><%= producto.getUsuarioVendedor()%></td>
+        <td> <%= producto.getCategoriaDTO().getTipo()%></td>
+        <td><%= producto.getUsuarioByUsuarioVendedor().getNombre()%></td>
         <td><a href="/administrador/<%= producto.getIdproducto()%>/borrarProducto" style="color: #04AA6D;">Borrar</a></td>
         <td><a href="/administrador/producto/<%= producto.getIdproducto()%>" style="color: #04AA6D;">Editar</a></td>
     </tr>

@@ -92,6 +92,11 @@ public class AdministradorController {
         return "usuario";
     }
 
+
+
+
+
+
     @GetMapping("/productos")
     public String doProductos(Model model, @RequestParam(value = "filtroTitulo", required = false) String filtroTitulo) {
         List<ProductoDTO> productos = this.productoService.FiltrarTitulo(filtroTitulo);
@@ -102,6 +107,19 @@ public class AdministradorController {
         model.addAttribute("categorias", categorias);
 
         return "productos";
+    }
+
+    @GetMapping("/nuevoProducto")
+    public String doNewProducto(Model model) {
+        ProductoDTO productoDTO = new ProductoDTO();
+
+        List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios("");
+        List<CategoriaDTO> categorias = this.categoriaService.findAll();
+        model.addAttribute("producto", productoDTO);
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("usuarios", usuarios);
+
+        return "producto";
     }
 
     @GetMapping("/producto/{id}")
@@ -116,6 +134,26 @@ public class AdministradorController {
 
         return "producto";
     }
+
+    @PostMapping("/producto/save")
+    public String doSaveProducto(@ModelAttribute("producto") ProductoDTO productoDTO) {
+        this.productoService.save(productoDTO);
+
+        return "redirect:/administrador/productos";
+
+    }
+
+    @GetMapping("/{id}/borrarProducto")
+    public String doDeleteProducto(@PathVariable("id") String productoID) {
+        this.productoService.borrar(Integer.parseInt(productoID));
+
+        return "redirect:/administrador/productos";
+    }
+
+
+
+
+
 
     @GetMapping("/categorias")
     public String doCategorias(Model model, @RequestParam(value = "filtroTipo", required = false) String filtroTipo) {
@@ -152,7 +190,7 @@ public class AdministradorController {
     }
 
     @GetMapping("/{id}/borrarCategoria")
-    public String doDeleteCategoria(Model model, @PathVariable("id") String categoriaID) {
+    public String doDeleteCategoria(@PathVariable("id") String categoriaID) {
         this.categoriaService.borrar(Integer.parseInt(categoriaID));
 
         return "redirect:/administrador/categorias";

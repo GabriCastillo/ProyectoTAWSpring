@@ -17,7 +17,7 @@
 
 <h1>Listado de Categorias</h1>
 
-<form method="get" action="administrador/categorias">
+<form method="get" action="/administrador/categorias">
     Titulo: <input type="text" name="filtroTipo" value="" />
     <input type="submit" value="Filtrar" />
 </form>
