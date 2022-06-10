@@ -1,6 +1,7 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "productos_favoritos", schema = "proyectotaw")
 public class ProductosFavoritos {

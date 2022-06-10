@@ -1,5 +1,7 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.UsuarioDTO;
+
 import javax.persistence.*;
 
 @Entity
@@ -140,5 +142,19 @@ public class Usuario {
         return result;
     }
 
+    public UsuarioDTO toDTO() {
+        UsuarioDTO DTO = new UsuarioDTO();
 
+        DTO.setIdusuario(idusuario);
+        DTO.setRolIdrol(rolIdrol);
+        DTO.setNombre(nombre);
+        DTO.setPassword(password);
+        DTO.setApellido(apellido);
+        DTO.setCiudadResidencia(ciudadResidencia);
+        DTO.setDomicilio(domicilio);
+        DTO.setEdad(edad);
+        DTO.setSexo(sexo);
+
+        return DTO;
+    }
 }

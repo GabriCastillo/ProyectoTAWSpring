@@ -1,6 +1,7 @@
 package es.taw.proyecto.entity;
 
-
+import es.taw.proyecto.dto.ListaDTO;
+import es.taw.proyecto.dto.UsuarioDTO;
 
 import javax.persistence.*;
 
@@ -74,5 +75,14 @@ public class Lista {
         this.usuarioByUsuarioLista = usuarioByUsuarioLista;
     }
 
+    public ListaDTO toDTO() {
+        ListaDTO DTO = new ListaDTO();
 
+        DTO.setIdLista(this.idLista);
+        DTO.setNombre(this.nombre);
+        DTO.setUsuarioLista(this.usuarioLista);
+        DTO.setUsuarioByUsuarioLista(this.usuarioByUsuarioLista);
+
+        return DTO;
+    }
 }

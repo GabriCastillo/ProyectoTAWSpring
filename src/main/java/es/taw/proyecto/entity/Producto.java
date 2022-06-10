@@ -1,6 +1,6 @@
 package es.taw.proyecto.entity;
 
-
+import es.taw.proyecto.dto.ProductoDTO;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -127,5 +127,17 @@ public class Producto {
         this.productosFavoritosByIdproducto = productosFavoritosByIdproducto;
     }
 
+    public ProductoDTO toDTO() {
+        ProductoDTO DTO = new ProductoDTO();
 
+        DTO.setIdproducto(this.idproducto);
+        DTO.setTitulo(this.titulo);
+        DTO.setDescripcion(this.descripcion);
+        DTO.setUrlImagen(this.urlImagen);
+        DTO.setUsuarioVendedor(this.usuarioVendedor);
+        DTO.setCategoriaIdcategoria(this.categoriaIdcategoria);
+        DTO.setUsuarioByUsuarioVendedor(this.usuarioByUsuarioVendedor);
+
+        return DTO;
+    }
 }
