@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri May 20 16:37:12 UTC 2022:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0180-e254-8495-000007607ca8 
-on database directory D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\PrpyectoSpring\TAW with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@7aec35a 
-Loaded from file:/C:/Users/casti/AppData/Roaming/JetBrains/IntelliJIdea2020.3/jdbc-drivers/Apache%20Derby/10.15.2.0/derby-10.15.2.0.jar
-java.vendor=JetBrains s.r.o.
-java.runtime.version=11.0.9.1+11-b1145.77
-user.dir=D:\MEGAsync\Estudios\UMA\3er_año\Segundo Cuatri\TAW\PrpyectoSpring
+Fri Jun 10 20:01:22 CEST 2022:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0181-4ec7-2211-000007f439c0 
+on database directory memory:C:\Users\Raul Doblas\Documents\Uni\springTaw\ProyectoTAWSpring\f072217c-823d-4f6b-b125-2118bdb7bba6 with class loader sun.misc.Launcher$AppClassLoader@18b4aac2 
+Loaded from file:/C:/Users/Raul%20Doblas/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_202-b08
+user.dir=C:\Users\Raul Doblas\Documents\Uni\springTaw\ProyectoTAWSpring
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

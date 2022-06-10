@@ -1,29 +1,24 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "ESTADISTICA_HAS_PRODUCTOS_FAVORITOS", schema = "TAW")
+@Table(name = "estadistica_has_productos_favoritos", schema = "proyectotaw")
 public class EstadisticaHasProductosFavoritos {
-    private Long id;
-    private Integer estadisticaIdestadistica;
-    private Integer productosFavoritosId;
-    private Estadistica estadisticaByEstadisticaIdestadistica;
-    private ProductosFavoritos productosFavoritosByProductosFavoritosId;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ESTADISTICA_IDESTADISTICA", nullable = false)
+    private Integer estadisticaIdestadistica;
+    @Basic
+    @Column(name = "PRODUCTOS_FAVORITOS_ID", nullable = false)
+    private Integer productosFavoritosId;
+    @OneToOne
+    @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA", nullable = false)
+    private Estadistica estadisticaByEstadisticaIdestadistica;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCTOS_FAVORITOS_ID", referencedColumnName = "IDFAVORITO", nullable = false, insertable = false, updatable = false)
+    private ProductosFavoritos productosFavoritosByProductosFavoritosId;
+
     public Integer getEstadisticaIdestadistica() {
         return estadisticaIdestadistica;
     }
@@ -32,8 +27,6 @@ public class EstadisticaHasProductosFavoritos {
         this.estadisticaIdestadistica = estadisticaIdestadistica;
     }
 
-    @Basic
-    @Column(name = "PRODUCTOS_FAVORITOS_ID", nullable = false)
     public Integer getProductosFavoritosId() {
         return productosFavoritosId;
     }
@@ -46,17 +39,24 @@ public class EstadisticaHasProductosFavoritos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         EstadisticaHasProductosFavoritos that = (EstadisticaHasProductosFavoritos) o;
-        return Objects.equals(estadisticaIdestadistica, that.estadisticaIdestadistica) && Objects.equals(productosFavoritosId, that.productosFavoritosId);
+
+        if (estadisticaIdestadistica != null ? !estadisticaIdestadistica.equals(that.estadisticaIdestadistica) : that.estadisticaIdestadistica != null)
+            return false;
+        if (productosFavoritosId != null ? !productosFavoritosId.equals(that.productosFavoritosId) : that.productosFavoritosId != null)
+            return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(estadisticaIdestadistica, productosFavoritosId);
+        int result = estadisticaIdestadistica != null ? estadisticaIdestadistica.hashCode() : 0;
+        result = 31 * result + (productosFavoritosId != null ? productosFavoritosId.hashCode() : 0);
+        return result;
     }
 
-    @OneToOne
-    @JoinColumn(name = "ESTADISTICA_IDESTADISTICA", referencedColumnName = "IDESTADISTICA", nullable = false)
     public Estadistica getEstadisticaByEstadisticaIdestadistica() {
         return estadisticaByEstadisticaIdestadistica;
     }
@@ -65,8 +65,6 @@ public class EstadisticaHasProductosFavoritos {
         this.estadisticaByEstadisticaIdestadistica = estadisticaByEstadisticaIdestadistica;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "PRODUCTOS_FAVORITOS_ID", referencedColumnName = "IDFAVORITO", nullable = false)
     public ProductosFavoritos getProductosFavoritosByProductosFavoritosId() {
         return productosFavoritosByProductosFavoritosId;
     }

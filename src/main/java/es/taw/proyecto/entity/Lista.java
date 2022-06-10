@@ -1,29 +1,25 @@
 package es.taw.proyecto.entity;
 
+
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Lista {
-    private Long id;
-    private Integer idLista;
-    private String nombre;
-    private Integer usuarioLista;
-    private Usuario usuarioByUsuarioLista;
-    private Usuario usuarioByUsuarioLista_0;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID_LISTA", nullable = false)
+    private Integer idLista;
+    @Basic
+    @Column(name = "NOMBRE", nullable = false, length = 45)
+    private String nombre;
+    @Basic
+    @Column(name = "USUARIO_LISTA", nullable = true)
+    private Integer usuarioLista;
+    @ManyToOne
+    @JoinColumn(name = "USUARIO_LISTA", referencedColumnName = "IDUSUARIO", insertable = false, updatable = false)
+    private Usuario usuarioByUsuarioLista;
+
     public Integer getIdLista() {
         return idLista;
     }
@@ -32,8 +28,6 @@ public class Lista {
         this.idLista = idLista;
     }
 
-    @Basic
-    @Column(name = "NOMBRE", nullable = false, length = 45)
     public String getNombre() {
         return nombre;
     }
@@ -42,8 +36,6 @@ public class Lista {
         this.nombre = nombre;
     }
 
-    @Basic
-    @Column(name = "USUARIO_LISTA", nullable = true)
     public Integer getUsuarioLista() {
         return usuarioLista;
     }
@@ -56,17 +48,24 @@ public class Lista {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Lista lista = (Lista) o;
-        return Objects.equals(idLista, lista.idLista) && Objects.equals(nombre, lista.nombre) && Objects.equals(usuarioLista, lista.usuarioLista);
+
+        if (idLista != null ? !idLista.equals(lista.idLista) : lista.idLista != null) return false;
+        if (nombre != null ? !nombre.equals(lista.nombre) : lista.nombre != null) return false;
+        if (usuarioLista != null ? !usuarioLista.equals(lista.usuarioLista) : lista.usuarioLista != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idLista, nombre, usuarioLista);
+        int result = idLista != null ? idLista.hashCode() : 0;
+        result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
+        result = 31 * result + (usuarioLista != null ? usuarioLista.hashCode() : 0);
+        return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "USUARIO_LISTA", referencedColumnName = "IDUSUARIO")
     public Usuario getUsuarioByUsuarioLista() {
         return usuarioByUsuarioLista;
     }
@@ -75,13 +74,5 @@ public class Lista {
         this.usuarioByUsuarioLista = usuarioByUsuarioLista;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "USUARIO_LISTA", referencedColumnName = "IDUSUARIO")
-    public Usuario getUsuarioByUsuarioLista_0() {
-        return usuarioByUsuarioLista_0;
-    }
 
-    public void setUsuarioByUsuarioLista_0(Usuario usuarioByUsuarioLista_0) {
-        this.usuarioByUsuarioLista_0 = usuarioByUsuarioLista_0;
-    }
 }
