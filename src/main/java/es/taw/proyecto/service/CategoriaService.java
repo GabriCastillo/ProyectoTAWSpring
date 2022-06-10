@@ -7,6 +7,7 @@ import es.taw.proyecto.dto.ListaDTO;
 import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.Categoria;
 import es.taw.proyecto.entity.CompradorProducto;
+import es.taw.proyecto.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,24 +29,24 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public List<CategoriaDTO> toDTO (List<Categoria> categorias) {
+    public List<CategoriaDTO> toDTO(List<Categoria> categorias) {
         List<CategoriaDTO> DTO = new ArrayList<>();
-        for(Categoria categoria : categorias) {
+        for (Categoria categoria : categorias) {
             DTO.add(categoria.toDTO());
         }
         return DTO;
     }
 
-    public List<CategoriaDTO> listarCategoriasUltimas (List<UsuarioDTO> compradores) {
+    public List<CategoriaDTO> listarCategoriasUltimas(List<UsuarioDTO> compradores) {
         List<Categoria> categorias = new ArrayList<>();
         List<CompradorProducto> compradoresProductosAll = this.compradorProductoRepository.findAll();
 
-        if((compradores != null) && !compradoresProductosAll.isEmpty()) {
+        if ((compradores != null) && !compradoresProductosAll.isEmpty()) {
             List<CompradorProducto> compradoresProductosAux = new ArrayList<>();
 
-            for(UsuarioDTO comprador : compradores) {
-                for(CompradorProducto compradorProducto : compradoresProductosAll) {
-                    if((compradorProducto.getUsuarioComprador() != null) && compradorProducto.getUsuarioComprador().equals(comprador.getIdusuario())) {
+            for (UsuarioDTO comprador : compradores) {
+                for (CompradorProducto compradorProducto : compradoresProductosAll) {
+                    if ((compradorProducto.getUsuarioComprador() != null) && compradorProducto.getUsuarioComprador().equals(comprador.getIdusuario())) {
                         compradoresProductosAux.add(compradorProducto);
                     }
                 }
@@ -59,15 +60,53 @@ public class CategoriaService {
         return null;
     }
 
-    public List<CategoriaDTO> listarCategoriasUltimasLista (List<ListaDTO> listas) {
-        if((listas != null) && (listas.get(0).getUsuarioByUsuarioLista() != null)) {
+    public List<CategoriaDTO> listarCategoriasUltimasLista(List<ListaDTO> listas) {
+        if ((listas != null) && (listas.get(0).getUsuarioByUsuarioLista() != null)) {
             List<UsuarioDTO> compradores = new ArrayList<>();
-            for(ListaDTO lista : listas) {
+            for (ListaDTO lista : listas) {
                 compradores.add(lista.getUsuarioByUsuarioLista().toDTO());
             }
             return this.listarCategoriasUltimas(compradores);
         }
 
         return null;
+    }
+
+
+    public List<CategoriaDTO> listarCategorias(String tipo) {
+
+        List<Categoria> categoria;
+        Boolean titulo = !((tipo == null) || (tipo.isEmpty()));
+        if (!titulo) {
+            categoria = this.categoriaRepository.findAll();
+        } else {
+            categoria = this.categoriaRepository.findCategoriasByTipo(tipo);
+        }
+        return this.toDTO(categoria);
+    }
+
+    public List<CategoriaDTO> findAll() {
+        return toDTO(this.categoriaRepository.findAll());
+    }
+
+    public CategoriaDTO findByID(int parseInt) {
+        return this.categoriaRepository.findByIdCategoria(parseInt).toDTO();
+    }
+
+    public Categoria findCategoriaByID(Integer idCategoria) {
+        Categoria categoria;
+        categoria = this.categoriaRepository.findByIdCategoria(idCategoria);
+        return categoria;
+    }
+
+    public void save(CategoriaDTO categoriaDTO) {
+        Categoria categoria = new Categoria();
+        categoria.edit(categoriaDTO);
+        this.categoriaRepository.save(categoria);
+    }
+
+    public void borrar(int parseInt) {
+        Categoria categoria = this.categoriaRepository.findByIdCategoria(parseInt);
+        this.categoriaRepository.delete(categoria);
     }
 }

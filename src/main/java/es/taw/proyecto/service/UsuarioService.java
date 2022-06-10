@@ -150,4 +150,16 @@ public class UsuarioService {
         return nuevousuarios;
 
     }
+
+    public UsuarioDTO findByID(int parseInt) {
+        Usuario usuario = this.usuarioRepository.findUsuarioByIdusuario(parseInt);
+        return usuario.toDTO();
+    }
+
+    public UsuarioDTO asignarRolEntity(UsuarioDTO usuario) {
+
+        usuario.setRol(this.rolRepository.findByIdRol(usuario.getRolIdrol()).toDTO());
+
+        return usuario;
+    }
 }

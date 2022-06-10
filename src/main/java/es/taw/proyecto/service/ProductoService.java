@@ -1,9 +1,11 @@
 package es.taw.proyecto.service;
 
+import es.taw.proyecto.dao.CategoriaRepository;
 import es.taw.proyecto.dao.CompradorProductoRepository;
 import es.taw.proyecto.dao.ProductoRepository;
 import es.taw.proyecto.dao.UsuarioRepository;
 import es.taw.proyecto.dto.ProductoDTO;
+import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.CompradorProducto;
 import es.taw.proyecto.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,16 @@ public class ProductoService {
     protected UsuarioRepository usuarioRepository;
     protected CompradorProductoRepository compradorProductoRepository;
     protected ProductoRepository productoRepository;
+    protected CategoriaRepository categoriaRepository;
+
+    public CategoriaRepository getCategoriaRepository() {
+        return categoriaRepository;
+    }
+
+    @Autowired
+    public void setCategoriaRepository(CategoriaRepository categoriaRepository) {
+        this.categoriaRepository = categoriaRepository;
+    }
 
     @Autowired
     public void setUsuarioRepository(UsuarioRepository usuarioRepository) {
@@ -34,9 +46,9 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<ProductoDTO> toDTO (List<Producto> productos) {
+    public List<ProductoDTO> toDTO(List<Producto> productos) {
         List<ProductoDTO> DTO = new ArrayList<>();
-        for(Producto producto : productos) {
+        for (Producto producto : productos) {
             DTO.add(producto.toDTO());
         }
         return DTO;
@@ -46,13 +58,47 @@ public class ProductoService {
         List<Producto> productos = new ArrayList<>();
         List<CompradorProducto> compradoresProductosCompradorless = this.compradorProductoRepository.findCompradorProductoByUsuarioByUsuarioCompradorIsNull();
 
-        if(!compradoresProductosCompradorless.isEmpty()) {
-            for(CompradorProducto compradorProductoCompradorless : compradoresProductosCompradorless) {
+        if (!compradoresProductosCompradorless.isEmpty()) {
+            for (CompradorProducto compradorProductoCompradorless : compradoresProductosCompradorless) {
                 productos.add(this.productoRepository.findById(compradorProductoCompradorless.getProductoIdproducto()).orElse(null));
             }
             return this.toDTO(productos);
         }
 
         return null;
+    }
+
+    public List<ProductoDTO> FiltrarTitulo(String filtroTitulo) {
+        List<Producto> productoList;
+        Boolean titulo = !((filtroTitulo == null) || (filtroTitulo.isEmpty()));
+        if (!titulo) {
+            productoList = this.productoRepository.findAll();
+        } else {
+            productoList = this.productoRepository.findProductosByTitulo(filtroTitulo);
+        }
+        return this.toDTO(productoList);
+    }
+
+    public List<ProductoDTO> asignarCategoria(List<ProductoDTO> productos) {
+        List<ProductoDTO> productoDTOList = new ArrayList<>();
+
+        for (ProductoDTO p : productos) {
+            p.setCategoriaDTO(this.categoriaRepository.findByIdCategoria(p.getCategoriaIdcategoria()).toDTO());
+            productoDTOList.add(p);
+        }
+
+        return productoDTOList;
+    }
+
+    public ProductoDTO findByID(int parseInt) {
+        Producto producto;
+        producto = this.productoRepository.findProductoByIdproducto(parseInt);
+        return producto.toDTO();
+    }
+
+    public ProductoDTO asignarRolEntity(ProductoDTO productoDTO) {
+
+        productoDTO.setCategoriaDTO(this.categoriaRepository.findByIdCategoria(productoDTO.getCategoriaIdcategoria()).toDTO());
+        return productoDTO;
     }
 }

@@ -20,7 +20,7 @@
 <jsp:include page="/WEB-INF/view/cabecera.jsp" />
 
 <h1>Listado de usuarios</h1>
-<form method="post" action="/administrador/usuarios/filtrarUsuarios">
+<form method="get" action="/administrador/usuarios">
     Nombre: <input type="text" name="filtroNombre" value="" />
     Apellido: <input type="text" name="filtroApellido" value="" />
     <select  name="filtroRol">
@@ -75,8 +75,8 @@
         <td><%= usuario.getEdad()%></td>
         <td><%= usuario.getSexo()%></td>
         <td><%= usuario.getRol().getNombre()%></td>
-        <td><a href="/administrador/<%= usuario.getIdusuario()%>/borrarUsuarios" style="color: #04AA6D;">Borrar</a></td>
-        <td><a href="/administrador/<%= usuario.getIdusuario()%>/" style="color: #04AA6D;">Editar</a></td>
+        <td><a href="/administrador/<%= usuario.getIdusuario()%>/borrarUsuario" style="color: #04AA6D;">Borrar</a></td>
+        <td><a href="/administrador/usuario/<%= usuario.getIdusuario()%>/" style="color: #04AA6D;">Editar</a></td>
     </tr>
 
     <%

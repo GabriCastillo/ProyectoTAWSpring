@@ -74,4 +74,8 @@ public class Categoria {
     }
 
 
+    public void edit(CategoriaDTO categoria) {
+        this.setTipo(categoria.getTipo());
+        this.setIdCategoria(categoria.getIdCategoria());
+    }
 }

@@ -1,15 +1,15 @@
 package es.taw.proyecto.controller;
 
+import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.ProductoDTO;
 import es.taw.proyecto.dto.RolDTO;
 import es.taw.proyecto.dto.UsuarioDTO;
+import es.taw.proyecto.entity.Categoria;
 import es.taw.proyecto.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -70,49 +70,92 @@ public class AdministradorController {
 
     @GetMapping("/usuarios")
     public String doUsuarios(Model model, @RequestParam(value = "filtroNombre", required = false) String filtroNombre, @RequestParam(value = "filtroApellido", required = false) String filtroApellido, @RequestParam(value = "filtroRol", required = false) String filtroRol) {
-        List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios("");
+        List<UsuarioDTO> usuarios = this.usuarioService.filtrarNombreApellidoRol(filtroNombre, filtroApellido, filtroRol);
         usuarios = this.usuarioService.asignarRolEntity(usuarios);
 
         List<RolDTO> roles = this.rolservice.findAll();
         model.addAttribute("usuarios", usuarios);
-        model.addAttribute("roles",roles);
+        model.addAttribute("roles", roles);
 
         return "usuarios";
     }
 
-    @PostMapping("/usuarios/filtrarUsuarios")
-    public String doFiltrar(Model model, @RequestParam(value = "filtroNombre", required = false) String filtroNombre, @RequestParam(value = "filtroApellido", required = false) String filtroApellido, @RequestParam(value = "filtroRol", required = false) String filtroRol) {
-        List<UsuarioDTO> usuarios = this.usuarioService.filtrarNombreApellidoRol(filtroNombre, filtroApellido, filtroRol);
-        usuarios = this.usuarioService.asignarRolEntity(usuarios);
-        List<RolDTO> roles = this.rolservice.findAll();
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("roles",roles);
+    @GetMapping("/usuario/{id}")
+    public String doUsuario(Model model, @PathVariable("id") String usuarioID) {
+        UsuarioDTO usuario = this.usuarioService.findByID(Integer.parseInt(usuarioID));
+        usuario = this.usuarioService.asignarRolEntity(usuario);
 
-        return "usuarios";
+        List<RolDTO> roles = this.rolservice.findAll();
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("roles", roles);
+
+        return "usuario";
     }
 
     @GetMapping("/productos")
     public String doProductos(Model model, @RequestParam(value = "filtroTitulo", required = false) String filtroTitulo) {
+        List<ProductoDTO> productos = this.productoService.FiltrarTitulo(filtroTitulo);
+        productos = this.productoService.asignarCategoria(productos);
+
+        List<CategoriaDTO> categorias = this.categoriaService.findAll();
+        model.addAttribute("productos", productos);
+        model.addAttribute("categorias", categorias);
+
+        return "productos";
+    }
+
+    @GetMapping("/producto/{id}")
+    public String doProducto(Model model, @PathVariable("id") String productoID) {
+        ProductoDTO productoDTO = this.productoService.findByID(Integer.parseInt(productoID));
+        productoDTO = this.productoService.asignarRolEntity(productoDTO);
         List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios("");
-        usuarios = this.usuarioService.asignarRolEntity(usuarios);
-
-        List<RolDTO> roles = this.rolservice.findAll();
+        List<CategoriaDTO> categorias = this.categoriaService.findAll();
+        model.addAttribute("producto", productoDTO);
+        model.addAttribute("categorias", categorias);
         model.addAttribute("usuarios", usuarios);
-        model.addAttribute("roles",roles);
 
-        return "usuarios";
+        return "producto";
     }
 
     @GetMapping("/categorias")
-    public String doCategorias(Model model, @RequestParam(value = "filtroNombre", required = false) String filtroNombre, @RequestParam(value = "filtroApellido", required = false) String filtroApellido, @RequestParam(value = "filtroRol", required = false) String filtroRol) {
-        List<UsuarioDTO> usuarios = this.usuarioService.listarUsuarios("");
-        usuarios = this.usuarioService.asignarRolEntity(usuarios);
+    public String doCategorias(Model model, @RequestParam(value = "filtroTipo", required = false) String filtroTipo) {
+        List<CategoriaDTO> categorias = this.categoriaService.listarCategorias(filtroTipo);
+        model.addAttribute("categorias", categorias);
 
-        List<RolDTO> roles = this.rolservice.findAll();
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("roles",roles);
+        return "categorias";
+    }
 
-        return "usuarios";
+    @GetMapping("/nuevaCategoria")
+    public String doNewCategoria(Model model) {
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+
+        model.addAttribute("categoria", categoriaDTO);
+
+        return "categoria";
+    }
+
+    @GetMapping("/categoria/{id}")
+    public String doCategoria(Model model, @PathVariable("id") String categoriaID) {
+        CategoriaDTO categoriaDTO = this.categoriaService.findByID(Integer.parseInt(categoriaID));
+
+        model.addAttribute("categoria", categoriaDTO);
+
+        return "categoria";
+    }
+
+    @PostMapping("/categoria/save")
+    public String doSaveCategoria(@ModelAttribute("categoria") CategoriaDTO categoriaDTO) {
+        this.categoriaService.save(categoriaDTO);
+
+        return "redirect:/administrador/categorias";
+
+    }
+
+    @GetMapping("/{id}/borrarCategoria")
+    public String doDeleteCategoria(Model model, @PathVariable("id") String categoriaID) {
+        this.categoriaService.borrar(Integer.parseInt(categoriaID));
+
+        return "redirect:/administrador/categorias";
     }
 
 }

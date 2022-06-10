@@ -15,6 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     List<Usuario> findUsuarioByNombre(String nombre);
 
+    Usuario findUsuarioByIdusuario(int id);
+
 
 
     @Query("SELECT u FROM Usuario u WHERE u.nombre LIKE CONCAT('%', :nombre, '%')")

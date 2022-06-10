@@ -10,6 +10,15 @@ public class ProductoDTO {
     private Integer usuarioVendedor;
     private Integer categoriaIdcategoria;
     private Usuario usuarioByUsuarioVendedor;
+    private CategoriaDTO categoriaDTO;
+
+    public CategoriaDTO getCategoriaDTO() {
+        return categoriaDTO;
+    }
+
+    public void setCategoriaDTO(CategoriaDTO categoriaDTO) {
+        this.categoriaDTO = categoriaDTO;
+    }
 
     public Integer getIdproducto() {
         return idproducto;
