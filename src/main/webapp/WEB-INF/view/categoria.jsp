@@ -40,7 +40,9 @@
         <div style="text-align:center"><input id="btn" type="submit" value="Subir"/></div>
     </form:form>
     </br>
-    <div style="text-align:center"><a href="/administrador/categorias" style="color: #04AA6D;">Cancelar</a></div>
+    <form:form method="post" action="/administrador/cancelarCategoria">
+    <div style="text-align:center"><input type="submit" value="Cancelar" style="color: #04AA6D;"/>
+        </form:form>
 </section>
 </body>
 </html>

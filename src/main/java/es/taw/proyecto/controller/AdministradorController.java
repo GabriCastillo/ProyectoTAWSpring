@@ -80,6 +80,17 @@ public class AdministradorController {
         return "usuarios";
     }
 
+    @GetMapping("/nuevoUsuario")
+    public String doNewUsuario(Model model) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        List<RolDTO> roles = this.rolservice.findAll();
+        model.addAttribute("usuario", usuarioDTO);
+        model.addAttribute("roles", roles);
+
+        return "usuario";
+    }
+
+
     @GetMapping("/usuario/{id}")
     public String doUsuario(Model model, @PathVariable("id") String usuarioID) {
         UsuarioDTO usuario = this.usuarioService.findByID(Integer.parseInt(usuarioID));
@@ -92,6 +103,26 @@ public class AdministradorController {
         return "usuario";
     }
 
+    @PostMapping("/usuario/save")
+    public String doSaveUsuario(@ModelAttribute("producto") UsuarioDTO usuarioDTO) {
+        this.usuarioService.save(usuarioDTO);
+
+        return "redirect:/administrador/usuarios";
+
+    }
+
+    @GetMapping("/{id}/borrarUsuario")
+    public String doDeleteUsuario(@PathVariable("id") String usuarioID) {
+        this.usuarioService.borrar(Integer.parseInt(usuarioID));
+
+        return "redirect:/administrador/usuarios";
+    }
+
+
+    @PostMapping("/cancelarUsuario")
+    public String doCancelarUsuario() {
+        return "redirect:/administrador/usuarios";
+    }
 
 
 
@@ -150,7 +181,10 @@ public class AdministradorController {
         return "redirect:/administrador/productos";
     }
 
-
+    @PostMapping("/cancelarProducto")
+    public String doCancelarProducto() {
+        return "redirect:/administrador/productos";
+    }
 
 
 
@@ -193,6 +227,11 @@ public class AdministradorController {
     public String doDeleteCategoria(@PathVariable("id") String categoriaID) {
         this.categoriaService.borrar(Integer.parseInt(categoriaID));
 
+        return "redirect:/administrador/categorias";
+    }
+
+    @PostMapping("/cancelarCategoria")
+    public String doCancelarCategoria() {
         return "redirect:/administrador/categorias";
     }
 

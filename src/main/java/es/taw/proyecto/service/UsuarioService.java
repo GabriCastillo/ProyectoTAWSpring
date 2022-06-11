@@ -6,6 +6,7 @@ import es.taw.proyecto.dao.UsuarioRepository;
 import es.taw.proyecto.dto.UsuarioDTO;
 import es.taw.proyecto.entity.CompradorProducto;
 import es.taw.proyecto.entity.Usuario;
+import org.hibernate.service.UnknownUnwrapTypeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -161,5 +162,16 @@ public class UsuarioService {
         usuario.setRol(this.rolRepository.findByIdRol(usuario.getRolIdrol()).toDTO());
 
         return usuario;
+    }
+
+    public void save(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario();
+        usuario.edit(usuarioDTO);
+        this.usuarioRepository.save(usuario);
+    }
+
+    public void borrar(int parseInt) {
+        Usuario usuario = this.usuarioRepository.findUsuarioByIdusuario(parseInt);
+        this.usuarioRepository.delete(usuario);
     }
 }

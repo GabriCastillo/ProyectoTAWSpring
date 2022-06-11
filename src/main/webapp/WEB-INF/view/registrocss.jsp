@@ -1,30 +1,13 @@
-<%@ page import="es.taw.proyecto.dto.UsuarioDTO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: casti
-  Date: 05/06/2022
-  Time: 13:39
+  Date: 11/06/2022
+  Time: 12:57
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    UsuarioDTO admin = (UsuarioDTO) session.getAttribute("usuario");
-    if (admin == null) {
-        response.sendRedirect(request.getContextPath());
-    }
-%>
-
-
-<body>
-<header>
-    <ul>
-        <li><a href="/administrador/usuarios">Listado de usuarios</a></li>
-        <li><a href="/administrador/productos">Listado de productos</a></li>
-        <li><a href="/administrador/categorias">Listado de categorias</a></li>
-        <li style="float:right"><a href="/salir">Cerrar Sesion</a></li>
-        <li style="float:right"><a><%= admin.getNombre()%></a></li>
-    </ul>
-</header>
-</body>
+<html>
+</html>
 
 <style>
     * {
@@ -54,7 +37,6 @@
         margin-left: 20px;
         width: 70%;
     }
-
 
     .select {
         background-color: #828282;
@@ -185,17 +167,6 @@
 
     #btn {
         background-color: #04AA6D;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
-
-    #btnCancel {
-        background-color: #828282;
         border: none;
         color: white;
         padding: 15px 32px;

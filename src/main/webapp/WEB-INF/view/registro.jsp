@@ -1,19 +1,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
-    Author     : casti
-    Done       : 100%
+  Created by IntelliJ IDEA.
+  User: casti
+  Date: 11/06/2022
+  Time: 12:18
+  To change this template use File | Settings | File Templates.
 --%>
-
-
-<%@page import="java.util.List" %>
-<%@ page import="es.taw.proyecto.dto.RolDTO" %>
-<%@ page import="es.taw.proyecto.dto.UsuarioDTO" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Usuario</title>
+    <title>Nuevo usuario</title>
 </head>
 <%
     String strError = (String) request.getAttribute("error");
@@ -22,11 +20,12 @@
     }
 %>
 <body>
+<jsp:include page="/WEB-INF/view/registrocss.jsp" />
 
-<jsp:include page="/WEB-INF/view/cabecera.jsp"/>
 <section id="formulario2">
     <h1 id="titulo">Datos del Usuario</h1>
-    <form:form method="POST" action="/administrador/usuario/save" modelAttribute="usuario">
+
+    <form:form method="POST" action="/save" modelAttribute="usuario">
         <div style="display:flex">
             <div class="izqBox" style="width: 50%;margin-bottom: 15px">
                 <form:input type="hidden" name="id" path="idusuario"/>
@@ -68,8 +67,7 @@
             <div class="dBox">
                 <div class="input-container ic1">
                     <form:input id="edad" class="input" type="number" name="edad" min="18" placeholder=" " path="edad"
-                                required="on"
-                                oninvalid="this.setCustomValidity('Pon una edad que sea mayor que 18 años')"
+                                required="on" oninvalid="this.setCustomValidity('Pon una edad que sea mayor que 18 años')"
                                 oninput="this.setCustomValidity('')"/>
                     <div class="cut2"></div>
                     <label for="edad" class="placeholder">Edad</label>
@@ -91,26 +89,31 @@
                 </div>
 
                 <div class="input-container ic2">
-
-                    <form:select path="rolIdrol" id="rol" class="input" name="rol">
-                        <form:options items="${roles}" itemLabel="nombre" itemValue="idRol"/>
-                    </form:select>
-
+                    <form:input id="password2" class="input" type="text" name="password2" placeholder=" "
+                                path="password2" required="on"
+                                oninvalid="this.setCustomValidity('Pon la repeticion de la contraseña')"
+                                oninput="this.setCustomValidity('')"/>
                     <div class="cut2"></div>
-                    <label for="rol" class="placeholder">Rol</label>
+                    <label for="password2" class="placeholder">Repetir Contraseña</label>
                 </div>
+                <form:input id="rol" type="hidden" path="rolIdrol" name="rol" value="2"/>
+
             </div>
+
+
         </div>
         </br>
-        <div style="text-align:center"><input id="btn" type="submit" value="Subir"/></div>
+        <div style="text-align:center"><input id="btn" type="submit" value="Añadir Usuario"/></div>
 
     </form:form>
     </br>
+    <form:form method="post" action="/">
+    <div style="text-align:center"><input type="submit" value="Cancelar"  style="color: #04AA6D;"/>
+    </form:form>
+    </div>
 
-    <form:form method="post" action="/administrador/cancelarUsuario">
-    <div style="text-align:center"><input type="submit" value="Cancelar" style="color: #04AA6D;"/>
-        </form:form>
 </section>
+
 <%
     if (strError != "") {
 %>
@@ -126,3 +129,5 @@
 %>
 </body>
 </html>
+
+

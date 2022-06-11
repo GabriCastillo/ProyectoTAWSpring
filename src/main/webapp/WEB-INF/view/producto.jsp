@@ -25,10 +25,10 @@
 
 <body>
 <jsp:include page="/WEB-INF/view/cabecera.jsp" />
-<h1>Datos del Producto</h1>
+
 
 <section id="formulario2">
-
+    <h1 id="titulo">Datos del Producto</h1>
     <form:form method="POST" action="/administrador/producto/save" modelAttribute="producto">
         <div style="display:flex">
             <div class="izqBox" style="width: 50%;margin-bottom: 15px">
@@ -81,7 +81,9 @@
 
     </form:form>
     </br>
-    <div style="text-align:center"><a href="administrador/productos" style="color: #04AA6D;">Cancelar</a></div>
+    <form:form method="post" action="/administrador/cancelarProducto">
+    <div style="text-align:center"><input type="submit" value="Cancelar" style="color: #04AA6D;"/>
+        </form:form>
 </section>
 </body>
 </html>
