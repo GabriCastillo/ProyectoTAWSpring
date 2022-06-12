@@ -1,32 +1,32 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.CorreoDTO;
+
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 public class Correo {
-    private Long id;
-    private Integer idpromo;
-    private String mensaje;
-    private Integer idUsuario;
-    private Integer idProducto;
-    private Usuario usuarioByIdUsuario;
-    private Usuario usuarioByIdUsuario_0;
-    private Producto productoByIdProducto;
-    private Producto productoByIdProducto_0;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "IDPROMO", nullable = false)
+    private Integer idpromo;
+    @Basic
+    @Column(name = "MENSAJE", nullable = false, length = 300)
+    private String mensaje;
+    @Basic
+    @Column(name = "ID_USUARIO", nullable = false)
+    private Integer idUsuario;
+    @Basic
+    @Column(name = "ID_PRODUCTO", nullable = true)
+    private Integer idProducto;
+    @ManyToOne
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "IDUSUARIO", nullable = false, insertable = false, updatable = false)
+    private Usuario usuarioByIdUsuario;
+    @ManyToOne
+    @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "IDPRODUCTO", insertable = false, updatable = false)
+    private Producto productoByIdProducto;
+
     public Integer getIdpromo() {
         return idpromo;
     }
@@ -35,8 +35,6 @@ public class Correo {
         this.idpromo = idpromo;
     }
 
-    @Basic
-    @Column(name = "MENSAJE", nullable = false, length = 300)
     public String getMensaje() {
         return mensaje;
     }
@@ -45,8 +43,6 @@ public class Correo {
         this.mensaje = mensaje;
     }
 
-    @Basic
-    @Column(name = "ID_USUARIO", nullable = false)
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -55,8 +51,6 @@ public class Correo {
         this.idUsuario = idUsuario;
     }
 
-    @Basic
-    @Column(name = "ID_PRODUCTO", nullable = true)
     public Integer getIdProducto() {
         return idProducto;
     }
@@ -69,17 +63,26 @@ public class Correo {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Correo correo = (Correo) o;
-        return Objects.equals(idpromo, correo.idpromo) && Objects.equals(mensaje, correo.mensaje) && Objects.equals(idUsuario, correo.idUsuario) && Objects.equals(idProducto, correo.idProducto);
+
+        if (idpromo != null ? !idpromo.equals(correo.idpromo) : correo.idpromo != null) return false;
+        if (mensaje != null ? !mensaje.equals(correo.mensaje) : correo.mensaje != null) return false;
+        if (idUsuario != null ? !idUsuario.equals(correo.idUsuario) : correo.idUsuario != null) return false;
+        if (idProducto != null ? !idProducto.equals(correo.idProducto) : correo.idProducto != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idpromo, mensaje, idUsuario, idProducto);
+        int result = idpromo != null ? idpromo.hashCode() : 0;
+        result = 31 * result + (mensaje != null ? mensaje.hashCode() : 0);
+        result = 31 * result + (idUsuario != null ? idUsuario.hashCode() : 0);
+        result = 31 * result + (idProducto != null ? idProducto.hashCode() : 0);
+        return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "IDUSUARIO", nullable = false)
     public Usuario getUsuarioByIdUsuario() {
         return usuarioByIdUsuario;
     }
@@ -88,18 +91,6 @@ public class Correo {
         this.usuarioByIdUsuario = usuarioByIdUsuario;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "IDUSUARIO", nullable = false)
-    public Usuario getUsuarioByIdUsuario_0() {
-        return usuarioByIdUsuario_0;
-    }
-
-    public void setUsuarioByIdUsuario_0(Usuario usuarioByIdUsuario_0) {
-        this.usuarioByIdUsuario_0 = usuarioByIdUsuario_0;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "IDPRODUCTO")
     public Producto getProductoByIdProducto() {
         return productoByIdProducto;
     }
@@ -108,13 +99,16 @@ public class Correo {
         this.productoByIdProducto = productoByIdProducto;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PRODUCTO", referencedColumnName = "IDPRODUCTO")
-    public Producto getProductoByIdProducto_0() {
-        return productoByIdProducto_0;
-    }
+    public CorreoDTO toDTO() {
+        CorreoDTO DTO = new CorreoDTO();
 
-    public void setProductoByIdProducto_0(Producto productoByIdProducto_0) {
-        this.productoByIdProducto_0 = productoByIdProducto_0;
+        DTO.setIdpromo(this.idpromo);
+        DTO.setMensaje(this.mensaje);
+        DTO.setIdUsuario(this.idUsuario);
+        DTO.setIdProducto(this.idProducto);
+        DTO.setUsuarioByIdUsuario(this.usuarioByIdUsuario);
+        DTO.setProductoByIdProducto(this.productoByIdProducto);
+
+        return DTO;
     }
 }

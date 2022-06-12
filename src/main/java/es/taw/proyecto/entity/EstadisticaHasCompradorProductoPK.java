@@ -1,16 +1,21 @@
 package es.taw.proyecto.entity;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Objects;
 
 public class EstadisticaHasCompradorProductoPK implements Serializable {
-    private Integer compradorProductoIdcompra;
-    private Integer estadisticaIdestadistica;
-
     @Column(name = "COMPRADOR_PRODUCTO_IDCOMPRA", nullable = false)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer compradorProductoIdcompra;
+    @Column(name = "ESTADISTICA_IDESTADISTICA", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer estadisticaIdestadistica;
+
     public Integer getCompradorProductoIdcompra() {
         return compradorProductoIdcompra;
     }
@@ -19,8 +24,6 @@ public class EstadisticaHasCompradorProductoPK implements Serializable {
         this.compradorProductoIdcompra = compradorProductoIdcompra;
     }
 
-    @Column(name = "ESTADISTICA_IDESTADISTICA", nullable = false)
-    @Id
     public Integer getEstadisticaIdestadistica() {
         return estadisticaIdestadistica;
     }
@@ -33,12 +36,21 @@ public class EstadisticaHasCompradorProductoPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         EstadisticaHasCompradorProductoPK that = (EstadisticaHasCompradorProductoPK) o;
-        return Objects.equals(compradorProductoIdcompra, that.compradorProductoIdcompra) && Objects.equals(estadisticaIdestadistica, that.estadisticaIdestadistica);
+
+        if (compradorProductoIdcompra != null ? !compradorProductoIdcompra.equals(that.compradorProductoIdcompra) : that.compradorProductoIdcompra != null)
+            return false;
+        if (estadisticaIdestadistica != null ? !estadisticaIdestadistica.equals(that.estadisticaIdestadistica) : that.estadisticaIdestadistica != null)
+            return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(compradorProductoIdcompra, estadisticaIdestadistica);
+        int result = compradorProductoIdcompra != null ? compradorProductoIdcompra.hashCode() : 0;
+        result = 31 * result + (estadisticaIdestadistica != null ? estadisticaIdestadistica.hashCode() : 0);
+        return result;
     }
 }
