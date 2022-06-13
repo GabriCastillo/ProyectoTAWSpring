@@ -50,13 +50,26 @@ public class UsuarioService {
         return null;
     }
 
-    public List<UsuarioDTO> listarUsuarios (String nombre) {
-        List<Usuario> usuarios;
+    public List<UsuarioDTO> listarUsuarios (String nombre, String filtroColumna) {
+        List<Usuario> usuarios = null;
 
         if((nombre == null) || nombre.equals("")) {
             usuarios = this.usuarioRepository.findAll();
         } else {
-            usuarios = this.usuarioRepository.findUsuarioByNombre(nombre);
+            switch(filtroColumna) {
+                case "0":
+                    usuarios = this.usuarioRepository.findUsuarioByNombre(nombre);
+                    break;
+                case "1":
+                    usuarios = this.usuarioRepository.findUsuarioByApellido(nombre);
+                    break;
+                case "2":
+                    usuarios = this.usuarioRepository.findUsuarioByEdad(Integer.parseInt(nombre));
+                    break;
+                case "3":
+                    usuarios = this.usuarioRepository.findUsuarioBySexo(nombre);
+                    break;
+            }
         }
 
         if(usuarios != null) {

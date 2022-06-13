@@ -84,7 +84,13 @@
 
 <h1>Todos los clientes compradores</h1>
 <form action="/marketing/">
-    Nombre: <input type="text" name="filtroCompradorAll" value="" />
+    <select name="filtroColumna">
+        <option selected value="0">Nombre</option>
+        <option value="1">Apellidos</option>
+        <option value="2">Edad</option>
+        <option value="3">Sexo</option>
+    </select>
+    : <input type="text" name="filtroCompradorAll" value="" />
     <input type="submit" value="Filtrar" />
 </form>
 

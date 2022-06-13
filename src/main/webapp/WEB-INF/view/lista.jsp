@@ -115,7 +115,13 @@
         
         <h1>Listado de compradores</h1>
         <form action="/lista/<%= compradoresLista.get(0).getNombre() %>/">
-            Nombre: <input type="text" name="filtroCompradorAll" value="" />
+            <select name="filtroColumna">
+                <option selected value="0">Nombre</option>
+                <option value="1">Apellidos</option>
+                <option value="2">Edad</option>
+                <option value="3">Sexo</option>
+            </select>
+            : <input type="text" name="filtroCompradorAll" value="" />
             <input type="submit" value="Filtrar" />
         </form>
 

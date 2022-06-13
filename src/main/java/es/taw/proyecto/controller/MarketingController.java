@@ -52,11 +52,11 @@ public class MarketingController {
     }
 
     @GetMapping("/")
-    public String doListar (Model model, @RequestParam(value = "filtroListaAll", required = false) String filtroListaAll, @RequestParam(value = "filtroCompradorAll", required = false) String filtroCompradorAll) {
+    public String doListar (Model model, @RequestParam(value = "filtroListaAll", required = false) String filtroListaAll, @RequestParam(value = "filtroCompradorAll", required = false) String filtroCompradorAll, @RequestParam(value = "filtroColumna", required = false) String filtroColumna) {
         List<ListaDTO> nombresListas = this.listaService.listarListas(filtroListaAll);
         model.addAttribute("nombresListas", nombresListas);
 
-        List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll));
+        List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll, filtroColumna));
         model.addAttribute("usuarios", compradores);
 
         List<CategoriaDTO> categoriasUltimas = this.categoriaService.listarCategoriasUltimas(compradores);
