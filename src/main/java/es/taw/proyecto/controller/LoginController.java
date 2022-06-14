@@ -34,6 +34,7 @@ public class LoginController {
         UsuarioDTO usuario = this.usuarioService.comprobarCredenciales(user, password);
         session.setAttribute("usuario", usuario);
 
+
         if (usuario == null) {
             model.addAttribute("error", "usuario o contraseña incorrectos");
         } else {
@@ -41,7 +42,7 @@ public class LoginController {
                 case 1:
                     return null;
                 case 2:
-                    return null;
+                    return "redirect:/usuario/";
                 case 3:
                     return null;
                 case 4:

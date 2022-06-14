@@ -76,5 +76,13 @@ public class CategoriaService {
         return null;
     }
 
+    public List<CategoriaDTO> todasCategorias(){
+        List<Categoria> categorias = this.categoriaRepository.findAll();
+        return toDTO(categorias);
+    }
 
+    public Integer buscarPorNombre(String nombreCategoria) {
+        Categoria categoria = this.categoriaRepository.findByTipo(nombreCategoria);
+        return categoria.getIdCategoria();
+    }
 }
