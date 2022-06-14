@@ -20,6 +20,5 @@ public interface ListaRepository extends JpaRepository<Lista, Integer> {
 
     @Modifying
     @Transactional
-    @Query("delete from Lista l where l.nombre = :nombreListaBorrar")
     void deleteListaByNombre(String nombreListaBorrar);
 }

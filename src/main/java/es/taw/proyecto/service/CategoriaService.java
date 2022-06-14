@@ -76,5 +76,42 @@ public class CategoriaService {
         return null;
     }
 
+    public List<CategoriaDTO> listarCategorias(String tipo) {
 
+        List<Categoria> categoria;
+        Boolean titulo = !((tipo == null) || (tipo.isEmpty()));
+        if (!titulo) {
+            categoria = this.categoriaRepository.findAll();
+        } else {
+            categoria = this.categoriaRepository.findBySimilarTipo(tipo);
+        }
+        return this.toDTO(categoria);
+    }
+    public  List<CategoriaDTO> findall(){
+        return this.toDTO(this.categoriaRepository.findAll());
+    }
+    public CategoriaDTO findByID(int parseInt) {
+        return this.categoriaRepository.findByIdCategoria(parseInt).toDTO();
+    }
+
+    public Categoria findCategoriaByID(Integer idCategoria) {
+        Categoria categoria;
+        categoria = this.categoriaRepository.findByIdCategoria(idCategoria);
+        return categoria;
+    }
+
+    public void save(CategoriaDTO categoriaDTO) {
+        Categoria categoria = new Categoria();
+        categoria.edit(categoriaDTO);
+        this.categoriaRepository.save(categoria);
+    }
+
+    public void borrar(int parseInt) {
+        Categoria categoria = this.categoriaRepository.findByIdCategoria(parseInt);
+        this.categoriaRepository.delete(categoria);
+    }
+    public Integer buscarPorNombre(String nombreCategoria) {
+        Categoria categoria = this.categoriaRepository.findByTipo(nombreCategoria);
+        return categoria.getIdCategoria();
+    }
 }

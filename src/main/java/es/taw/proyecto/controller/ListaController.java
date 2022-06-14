@@ -69,7 +69,7 @@ public class ListaController {
     }
 
     @GetMapping("/{listaNombre}/")
-    public String doListar (Model model, @PathVariable("listaNombre") String listaNombre, @RequestParam(value = "filtroCompradorAll", required = false) String filtroCompradorAll) {
+    public String doListar (Model model, @PathVariable("listaNombre") String listaNombre, @RequestParam(value = "filtroCompradorAll", required = false) String filtroCompradorAll, @RequestParam(value = "filtroColumna", required = false) String filtroColumna) {
         List<ListaDTO> listaClientes = this.listaService.listarListas(listaNombre);
         model.addAttribute("compradoresLista", listaClientes);
 
@@ -79,7 +79,7 @@ public class ListaController {
         List<ProductoDTO> productos = this.productoService.listarProductosDisponibles();
         model.addAttribute("productosLista", productos);
 
-        List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll));
+        List<UsuarioDTO> compradores = this.usuarioService.listarUsuariosCompradores(this.usuarioService.listarUsuarios(filtroCompradorAll, filtroColumna));
         model.addAttribute("compradores", compradores);
 
         List<CategoriaDTO> categoriasUltimas = this.categoriaService.listarCategoriasUltimas(compradores);

@@ -10,8 +10,25 @@ public class UsuarioDTO {
     private String sexo;
     private String password;
     private Integer rolIdrol;
+    private RolDTO rol;
+    private String password2;
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
 
     public UsuarioDTO() {
+    }
+    public RolDTO getRol() {
+        return rol;
+    }
+
+    public void setRol(RolDTO rol) {
+        this.rol = rol;
     }
 
     public Integer getIdusuario() {

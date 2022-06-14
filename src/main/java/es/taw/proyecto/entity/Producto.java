@@ -140,4 +140,12 @@ public class Producto {
 
         return DTO;
     }
+    public void edit(ProductoDTO productoDTO) {
+        this.setIdproducto(productoDTO.getIdproducto());
+        this.setTitulo(productoDTO.getTitulo());
+        this.setDescripcion(productoDTO.getDescripcion());
+        this.setUrlImagen(productoDTO.getDescripcion());
+        this.setUsuarioVendedor(productoDTO.getUsuarioVendedor());
+        this.setCategoriaIdcategoria(productoDTO.getCategoriaIdcategoria());
+    }
 }

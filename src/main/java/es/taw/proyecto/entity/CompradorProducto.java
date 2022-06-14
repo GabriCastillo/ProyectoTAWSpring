@@ -1,5 +1,8 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.CategoriaDTO;
+import es.taw.proyecto.dto.CompradorProductoDTO;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -146,5 +149,19 @@ public class CompradorProducto {
 
     public void setEstadisticaHasCompradorProductosByIdcompra(Collection<EstadisticaHasCompradorProducto> estadisticaHasCompradorProductosByIdcompra) {
         this.estadisticaHasCompradorProductosByIdcompra = estadisticaHasCompradorProductosByIdcompra;
+    }
+    public CompradorProductoDTO toDTO() {
+        CompradorProductoDTO DTO = new CompradorProductoDTO();
+
+        DTO.setIdcompra(this.idcompra);
+        DTO.setPrecioCompra(this.precioCompra);
+        DTO.setPrecioSalida(this.precioSalida);
+        DTO.setProductoByProductoIdproducto(this.productoByProductoIdproducto);
+        DTO.setProductoIdproducto(this.productoIdproducto);
+        DTO.setUsuarioByUsuarioComprador(this.usuarioByUsuarioComprador);
+        DTO.setUsuarioByUsuarioVendedor(this.usuarioByUsuarioVendedor);
+
+
+        return DTO;
     }
 }

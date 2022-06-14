@@ -1,160 +1,46 @@
-<%--
-    User: Javier
-    Percentage: 100%
+<%@ page import="es.taw.proyecto.dto.UsuarioDTO" %><%--
+  Created by IntelliJ IDEA.
+  User: casti
+  Date: 05/06/2022
+  Time: 13:39
+  To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-<%@ page import="es.taw.proyecto.dto.UsuarioDTO" %>
-<%@ page import="es.taw.proyecto.dto.ListaDTO" %>
-<%@ page import="es.taw.proyecto.dto.CategoriaDTO" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Listas de clientes</title>
-</head>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    UsuarioDTO user = (UsuarioDTO)session.getAttribute("usuario");
+    UsuarioDTO admin = (UsuarioDTO) session.getAttribute("usuario");
+    if (admin == null) {
+        response.sendRedirect(request.getContextPath());
+    }
 %>
+
+
 <body>
 <header>
     <ul>
-        <li><a class="active" href="/marketing/">Home</a></li>
-
+        <li><a href="/administrador/usuarios">Listado de usuarios</a></li>
+        <li><a href="/administrador/productos">Listado de productos</a></li>
+        <li><a href="/administrador/categorias">Listado de categorias</a></li>
         <li style="float:right"><a href="/salir">Cerrar Sesion</a></li>
-        <li style="float:right"><a><%= user.getNombre()%></a></li>
+        <li style="float:right"><a><%= admin.getNombre()%></a></li>
     </ul>
 </header>
-
-<h1>Listas creadas</h1>
-<form action="">
-    Nombre: <input type="text" name="filtroListaAll" value="" />
-    <input type="submit" value="Filtrar" />
-</form>
-
-<br>
-
-<%
-    List<ListaDTO> listas = (List)request.getAttribute("nombresListas");
-    if (listas == null || listas.isEmpty()) {
-%>
-<h2>No hay listas</h2>
-<%
-} else {
-%>
-<table border="1">
-    <tr>
-        <th>NOMBRE</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <%
-        List<String> nombresComunes = new ArrayList();
-        List<ListaDTO> listaUnificada = new ArrayList();
-        for (ListaDTO lista : listas) {
-            if (!nombresComunes.contains(lista.getNombre())) {
-                nombresComunes.add(lista.getNombre());
-                listaUnificada.add(lista);
-            }
-        }
-
-        for (ListaDTO lista : listaUnificada) {
-    %>
-    <tr>
-        <td><%= lista.getNombre()%></td>
-        <td><a href="/marketing/<%= lista.getNombre() %>/borrarLista">BORRAR</a></td>
-        <td><a href="/lista/<%= lista.getNombre() %>/">EDITAR</a></td>
-    </tr>
-
-    <%
-        }
-    %>
-</table>
-<%
-    }
-%>
-
-<br>
-
-<form method="POST" action="/marketing/crearLista">
-    <input type="text" size="12" name="nombreLista" value="" />
-    <input type="submit" value="Crear lista" />
-</form>
-
-<h1>Todos los clientes compradores</h1>
-<form action="/marketing/">
-    <select name="filtroColumna">
-        <option selected value="0">Nombre</option>
-        <option value="1">Apellidos</option>
-        <option value="2">Edad</option>
-        <option value="3">Sexo</option>
-    </select>
-    : <input type="text" name="filtroCompradorAll" value="" />
-    <input type="submit" value="Filtrar" />
-</form>
-
-<br>
-
-<%
-    List<UsuarioDTO> usuarios = (List) request.getAttribute("usuarios");
-    if (usuarios == null || usuarios.isEmpty()) {
-%>
-<h2>No hay clientes compradores</h2>
-<%
-} else {
-%>
-<table border="1">
-    <tr>
-        <th>NOMBRE</th>
-        <th>APELLIDOS</th>
-        <th>EDAD</th>
-        <th>SEXO</th>
-        <th>DOMICILIO</th>
-        <th>CIUDAD DE RESIDENCIA</th>
-        <th>ULTIMA CATEGORIA COMPRADA</th>
-        <th></th>
-    </tr>
-    <%
-        List<CategoriaDTO> ultimasCategorias = (List) request.getAttribute("categoriasUltimas");
-        for (UsuarioDTO usuario : usuarios) {
-    %>
-    <tr>
-        <td><%= usuario.getNombre()%></td>
-        <td><%= usuario.getApellido()%></td>
-        <td><%= usuario.getEdad()%></td>
-        <td><%= usuario.getSexo()%></td>
-        <td><%= usuario.getDomicilio()%></td>
-        <td><%= usuario.getCiudadResidencia()%></td>
-        <td><%= ultimasCategorias.get(usuarios.indexOf(usuario)).getTipo()%></td>
-        <td><a href="/correo/<%= usuario.getIdusuario() %>/">CORREO</a></td>
-    </tr>
-
-    <%
-        }
-    %>
-</table>
-<%
-    }
-%>
-
-
-
 </body>
-</html>
+
 <style>
-    *{
+    * {
         box-sizing: border-box;
     }
+
     .input-container {
         height: 50px;
-        position:relative ;
+        position: relative;
         width: 100%;
     }
 
     .ic1 {
         margin-top: 40px;
     }
+
     .input {
         background-color: #828282;
         border-radius: 12px;
@@ -164,7 +50,7 @@
         font-size: 15px;
         height: 100%;
         outline: 0;
-        padding: 4px 20px 0 ;
+        padding: 4px 20px 0;
         margin-left: 20px;
         width: 70%;
     }
@@ -179,10 +65,11 @@
         font-size: 15px;
         height: 100%;
         outline: 0;
-        padding: 4px 20px 0 ;
+        padding: 4px 20px 0;
         margin-left: 20px;
         width: 70%;
     }
+
     .input2 {
         background-color: #828282;
         border-radius: 12px;
@@ -192,7 +79,7 @@
         font-size: 15px;
         height: 130px;
         outline: 0;
-        padding: 4px 20px 0 ;
+        padding: 4px 20px 0;
         margin-left: 20px;
         width: 70%;
     }
@@ -223,6 +110,7 @@
         width: 96px;
 
     }
+
     .cut3 {
         background-color: #404040;
         border-radius: 10px;
@@ -235,12 +123,15 @@
         width: 96px;
 
     }
+
     .cut2-short {
         width: 50px;
     }
+
     .cut-short {
         width: 50px;
     }
+
     .cut3-short {
         width: 50px;
     }
@@ -250,8 +141,7 @@
     .input:focus ~ .cut2,
     .input:not(:placeholder-shown) ~ .cut2,
     .input2:focus ~ .cut2,
-    .input2:not(:placeholder-shown) ~ .cut2
-    {
+    .input2:not(:placeholder-shown) ~ .cut2 {
         transform: translateY(8px);
     }
 
@@ -271,27 +161,30 @@
     .input:focus ~ .placeholder,
     .input:not(:placeholder-shown) ~ .placeholder,
     .input2:focus ~ .placeholder,
-    .input2:not(:placeholder-shown) ~ .placeholder{
+    .input2:not(:placeholder-shown) ~ .placeholder {
         transform: translateY(-30px) translateX(10px) scale(0.75);
     }
 
     .input:not(:placeholder-shown) ~ .placeholder,
-    .input2:not(:placeholder-shown) ~ .placeholder{
+    .input2:not(:placeholder-shown) ~ .placeholder {
         color: #828282;
     }
 
     .input:focus ~ .placeholder,
-    .input2:focus ~ .placeholder{
+    .input2:focus ~ .placeholder {
         color: #04AA6D;
     }
+
     .ic2 {
         margin-top: 30px;
     }
+
     .ic3 {
         margin-top: 108px;
     }
-    #btn{
-        background-color:#04AA6D;
+
+    #btn {
+        background-color: #04AA6D;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -300,8 +193,9 @@
         display: inline-block;
         font-size: 16px;
     }
-    #btnCancel{
-        background-color:#828282;
+
+    #btnCancel {
+        background-color: #828282;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -310,10 +204,12 @@
         display: inline-block;
         font-size: 16px;
     }
-    #formText{
+
+    #formText {
         position: relative;
     }
-    #relleno{
+
+    #relleno {
         background-color: #DBCFBB;
         border-radius: 25px;
         margin-left: 25px;
@@ -321,49 +217,55 @@
         text-align: center;
         width: 200px;
     }
-    body{
-        background-color:  #DBCFBB;
+
+    body {
+        background-color: #DBCFBB;
     }
-    #titulo{
+
+    #titulo {
         display: block;
         text-align: center;
-        font-size:26px;
+        font-size: 26px;
         color: white;
     }
-    #subastas{
+
+    #subastas {
 
         border-radius: 25px;
         margin-top: 10px;
-        background-color:#404040 ;
+        background-color: #404040;
         width: 60%;
         height: 600px;
         float: left;
     }
 
-    #formulario2{
+    #formulario2 {
         border-radius: 25px;
         margin-top: 10px;
-        background-color:#404040 ;
+        background-color: #404040;
         height: 600px;
+        float: center;
     }
 
-    #usuarios{
+    #usuarios {
 
         border-radius: 25px;
         margin-top: 10px;
-        background-color:#404040 ;
+        background-color: #404040;
         width: 60%;
         height: 600px;
         float: left;
     }
-    #formulario{
+
+    #formulario {
         border-radius: 25px;
         margin-top: 10px;
-        background-color:#404040 ;
+        background-color: #404040;
         width: 37%;
         height: 600px;
-        float:right;
+        float: right;
     }
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -374,7 +276,7 @@
 
     li {
         float: left;
-        border-right:1px solid #bbb;
+        border-right: 1px solid #bbb;
     }
 
     li:last-child {
@@ -398,22 +300,25 @@
     }
 
 
-    table{border-collapse:collapse;}
-    th,tr,td{
-        border:1px solid #000;
-        width:150px;
-        height:45px;
-        vertical-align:middle;
-        text-align:center;
+    table {
+        border-collapse: collapse;
     }
-    th{
-        color:#fff;
+
+    th, tr, td {
+        border: 1px solid #000;
+        width: 150px;
+        height: 45px;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    th {
+        color: #fff;
         background-color: #252525;
     }
 
-    tr:nth-child(odd) td{
-        background-color:#eee;
+    tr:nth-child(odd) td {
+        background-color: #eee;
     }
 </style>
-
 

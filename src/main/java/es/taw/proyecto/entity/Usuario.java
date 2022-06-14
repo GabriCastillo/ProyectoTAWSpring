@@ -157,4 +157,15 @@ public class Usuario {
 
         return DTO;
     }
+    public void edit(UsuarioDTO usuarioDTO) {
+        this.setIdusuario(usuarioDTO.getIdusuario());
+        this.setRolIdrol(usuarioDTO.getRolIdrol());
+        this.setNombre(usuarioDTO.getNombre());
+        this.setPassword(usuarioDTO.getPassword());
+        this.setApellido(usuarioDTO.getApellido());
+        this.setCiudadResidencia(usuarioDTO.getCiudadResidencia());
+        this.setDomicilio(usuarioDTO.getDomicilio());
+        this.setEdad(usuarioDTO.getEdad());
+        this.setSexo(usuarioDTO.getSexo());
+    }
 }

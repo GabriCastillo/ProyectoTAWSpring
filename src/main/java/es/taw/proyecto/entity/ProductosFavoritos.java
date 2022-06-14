@@ -1,5 +1,7 @@
 package es.taw.proyecto.entity;
 
+import es.taw.proyecto.dto.FavoritoDTO;
+
 import javax.persistence.*;
 
 @Entity
@@ -43,6 +45,14 @@ public class ProductosFavoritos {
         this.productoIdproducto = productoIdproducto;
     }
 
+    public FavoritoDTO toDTO(){
+        FavoritoDTO DTO = new FavoritoDTO();
+        DTO.setIdfavorito(this.idfavorito);
+        DTO.setProductoIdproducto(this.productoIdproducto);
+        DTO.setUsuarioComprador(this.usuarioComprador);
+        return DTO;
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

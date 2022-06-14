@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,9 +40,9 @@ public class LoginController {
         } else {
             switch (usuario.getRolIdrol()) {
                 case 1:
-                    return null;
+                    return "redirect:/administrador/usuarios";
                 case 2:
-                    return null;
+                    return "redirect:/Iniciado/";
                 case 3:
                     return null;
                 case 4:
@@ -55,6 +56,33 @@ public class LoginController {
     @GetMapping("/salir")
     public String doExit (HttpSession session) {
         session.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/registro")
+    public String doRegistro(Model model) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        model.addAttribute("usuario", usuarioDTO);
+        return "registro";
+    }
+
+    @PostMapping("/save")
+    public String doSaveUsuario(@ModelAttribute("usuario") UsuarioDTO usuarioDTO, Model model) {
+        if(usuarioDTO.getPassword2().equals(usuarioDTO.getPassword())){
+            this.usuarioService.save(usuarioDTO);
+        }else{
+            String error="Las contraseñas no coinciden";
+            model.addAttribute("error",error);
+            model.addAttribute("usuario",usuarioDTO);
+            return "registro";
+        }
+
+        return "redirect:/";
+
+    }
+
+    @PostMapping("/")
+    public String doCancelar() {
         return "redirect:/";
     }
 }

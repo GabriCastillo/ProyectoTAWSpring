@@ -39,7 +39,7 @@ public class ListaService {
     }
 
     public List<ListaDTO> listarListas (String filtroListaAll) {
-        List<Lista> listas;
+        List<Lista> listas=null;
 
         if((filtroListaAll == null) || filtroListaAll.equals("")) {
             listas = this.listaRepository.findAll();

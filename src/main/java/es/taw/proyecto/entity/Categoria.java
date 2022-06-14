@@ -70,4 +70,8 @@ public class Categoria {
 
         return DTO;
     }
+    public void edit(CategoriaDTO categoria) {
+        this.setTipo(categoria.getTipo());
+        this.setIdCategoria(categoria.getIdCategoria());
+    }
 }

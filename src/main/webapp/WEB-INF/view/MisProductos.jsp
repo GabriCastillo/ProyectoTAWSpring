@@ -1,146 +1,121 @@
-<%--
-    User: Javier
-    Percentage: 100%
+<%-- 
+    Document   : MisProductos
+    Created on : 14-may-2022, 15:59:01
+    Author     : frees
+    Done       : 100%
 --%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
+
+
+<%@page import="java.util.List"%>
 <%@ page import="es.taw.proyecto.dto.UsuarioDTO" %>
-<%@ page import="es.taw.proyecto.dto.ListaDTO" %>
 <%@ page import="es.taw.proyecto.dto.CategoriaDTO" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="es.taw.proyecto.dto.ProductoDTO" %>
+<%@ page import="es.taw.proyecto.dto.CompradorProductoDTO" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Listas de clientes</title>
-</head>
-<%
-    UsuarioDTO user = (UsuarioDTO)session.getAttribute("usuario");
-%>
-<body>
-<header>
-    <ul>
-        <li><a class="active" href="/marketing/">Home</a></li>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Mis subastas</title>
+    </head>
+    <%
+        UsuarioDTO user = (UsuarioDTO) request.getAttribute("usuario");
+        List<CategoriaDTO> listaCategorias = (List) request.getAttribute("categorias");
+        ProductoDTO producto1 = (ProductoDTO) request.getAttribute("producto");
+        List<CompradorProductoDTO> listaSubastas = (List) request.getAttribute("subastas");
+        
+    %> 
+    <body>
+        <header>
+            <ul>
+                <li><a href='/Iniciado/'>Home</a></li>
+                <li><a href="/subastas/">Mis Subastas</a></li>
+                <li><a class="active" href='/Misproductos/'>Mis Productos</a></li>
+                <li><a href='/Misfavoritos/'>Mis Productos Favoritos</a></li>
+                <li style="float:right"><a href="/">Cerrar Sesion</a></li>
+                <li style="float:right"><a href="PerfilServlet"><%= user.getNombre() %></a></li>
+            </ul>
+        </header>
+    </br>
+    <form method="post" action='/Misproductos/filtrar/'>
+    Titulo: <input type="text" name="filtroTitulo" value="" />
+     
+    Categoria:<select id="categoria" class="input" name="categoria" placeholder=" " style="width:200px;">
+        <option value="">Todas la categoria</option>
+                            <%
+                                for (CategoriaDTO c : listaCategorias) {
+                                    String selected = "";
+                                    if (producto1 != null && producto1.getCategoriaIdcategoria().equals(c)) {
+                                        selected = "selected";
+                                    }
+                            %>
+                           
+                            <option <%= selected%> value="<%= String.valueOf(c.getIdCategoria())%>"><%= c.getTipo()%></option>    
+                            <%
+                                }
+                            %> 
 
-        <li style="float:right"><a href="/salir">Cerrar Sesion</a></li>
-        <li style="float:right"><a><%= user.getNombre()%></a></li>
-    </ul>
-</header>
-
-<h1>Listas creadas</h1>
-<form action="">
-    Nombre: <input type="text" name="filtroListaAll" value="" />
+                        </select>
+                              
     <input type="submit" value="Filtrar" />
 </form>
-
-<br>
-
-<%
-    List<ListaDTO> listas = (List)request.getAttribute("nombresListas");
-    if (listas == null || listas.isEmpty()) {
-%>
-<h2>No hay listas</h2>
-<%
-} else {
-%>
-<table border="1">
-    <tr>
-        <th>NOMBRE</th>
-        <th></th>
-        <th></th>
-    </tr>
-    <%
-        List<String> nombresComunes = new ArrayList();
-        List<ListaDTO> listaUnificada = new ArrayList();
-        for (ListaDTO lista : listas) {
-            if (!nombresComunes.contains(lista.getNombre())) {
-                nombresComunes.add(lista.getNombre());
-                listaUnificada.add(lista);
-            }
-        }
-
-        for (ListaDTO lista : listaUnificada) {
-    %>
-    <tr>
-        <td><%= lista.getNombre()%></td>
-        <td><a href="/marketing/<%= lista.getNombre() %>/borrarLista">BORRAR</a></td>
-        <td><a href="/lista/<%= lista.getNombre() %>/">EDITAR</a></td>
-    </tr>
-
-    <%
-        }
-    %>
-</table>
-<%
-    }
-%>
-
-<br>
-
-<form method="POST" action="/marketing/crearLista">
-    <input type="text" size="12" name="nombreLista" value="" />
-    <input type="submit" value="Crear lista" />
-</form>
-
-<h1>Todos los clientes compradores</h1>
-<form action="/marketing/">
-    <select name="filtroColumna">
-        <option selected value="0">Nombre</option>
-        <option value="1">Apellidos</option>
-        <option value="2">Edad</option>
-        <option value="3">Sexo</option>
-    </select>
-    : <input type="text" name="filtroCompradorAll" value="" />
-    <input type="submit" value="Filtrar" />
-</form>
-
-<br>
-
-<%
-    List<UsuarioDTO> usuarios = (List) request.getAttribute("usuarios");
-    if (usuarios == null || usuarios.isEmpty()) {
-%>
-<h2>No hay clientes compradores</h2>
-<%
-} else {
-%>
-<table border="1">
-    <tr>
-        <th>NOMBRE</th>
-        <th>APELLIDOS</th>
-        <th>EDAD</th>
-        <th>SEXO</th>
-        <th>DOMICILIO</th>
-        <th>CIUDAD DE RESIDENCIA</th>
-        <th>ULTIMA CATEGORIA COMPRADA</th>
-        <th></th>
-    </tr>
-    <%
-        List<CategoriaDTO> ultimasCategorias = (List) request.getAttribute("categoriasUltimas");
-        for (UsuarioDTO usuario : usuarios) {
-    %>
-    <tr>
-        <td><%= usuario.getNombre()%></td>
-        <td><%= usuario.getApellido()%></td>
-        <td><%= usuario.getEdad()%></td>
-        <td><%= usuario.getSexo()%></td>
-        <td><%= usuario.getDomicilio()%></td>
-        <td><%= usuario.getCiudadResidencia()%></td>
-        <td><%= ultimasCategorias.get(usuarios.indexOf(usuario)).getTipo()%></td>
-        <td><a href="/correo/<%= usuario.getIdusuario() %>/">CORREO</a></td>
-    </tr>
-
-    <%
-        }
-    %>
-</table>
-<%
-    }
-%>
-
-
-
-</body>
+    <center>
+        <section>
+            <%
+                if(!listaSubastas.isEmpty()){
+            %>
+            <section id="subastas" style="box-sizing:content-box">
+                <h1 id="titulo">Tus Productos</h1>
+            <%
+                
+                    for(CompradorProductoDTO subasta: listaSubastas){
+            %>
+            
+            <div style="display:flex;margin-top: 20px;margin-bottom: 20px">
+                <div style="width:40%;text-align: center">
+                    <img src="<%= subasta.getProductoByProductoIdproducto().getUrlImagen() %>"
+                         style="border-radius:15px;border: 5px solid #04AA6D " 
+                         alt="Foto del producto" width="200" height="200"> 
+                </div>
+                <div style="width:30%">
+                    <h2 style="color:cyan"><%=subasta.getProductoByProductoIdproducto().getTitulo()%></h2><br/>
+                    <a style="color:white">Descripcion: <%= subasta.getProductoByProductoIdproducto().getDescripcion() %></a><br/>
+                   
+                    <%
+                        if(subasta.getPrecioCompra()==0){
+                    %>
+                    <a style="color:white">Precio vendido: <%= subasta.getPrecioSalida() %> €</a>
+                    <%
+                        }else{
+                    %>
+                    <a style="color:white">Precio actual: <%= subasta.getPrecioSalida() %></a><br/>
+                    <a style="color:white">Precio limite: <%= subasta.getPrecioCompra()  %></a><br/>
+                    <%
+                        }
+                    %>
+                </div>
+                <div style="text-align: center;width:20%;margin-top: 50px">
+                   
+                    
+                    
+                    
+                </div>
+            </div>
+            <%
+                    }
+                }else{
+                  
+            %>
+            <h1>No has comprado ningun producto</h1> 
+                
+            <% 
+                }
+            %>    
+            </section>
+            
+        </section>
+      </center>      
+    </body>
 </html>
 <style>
     *{
@@ -156,21 +131,6 @@
         margin-top: 40px;
     }
     .input {
-        background-color: #828282;
-        border-radius: 12px;
-        border: 0;
-        box-sizing: border-box;
-        color: #eee;
-        font-size: 15px;
-        height: 100%;
-        outline: 0;
-        padding: 4px 20px 0 ;
-        margin-left: 20px;
-        width: 70%;
-    }
-
-
-    .select {
         background-color: #828282;
         border-radius: 12px;
         border: 0;
@@ -325,39 +285,24 @@
         background-color:  #DBCFBB;
     }
     #titulo{
+        
         display: block;
         text-align: center;
         font-size:26px;
         color: white;
     }
     #subastas{
-
+            
         border-radius: 25px;
         margin-top: 10px;
         background-color:#404040 ;
         width: 60%;
-        height: 600px;
-        float: left;
-    }
-
-    #formulario2{
-        border-radius: 25px;
-        margin-top: 10px;
-        background-color:#404040 ;
-        height: 600px;
-    }
-
-    #usuarios{
-
-        border-radius: 25px;
-        margin-top: 10px;
-        background-color:#404040 ;
-        width: 60%;
-        height: 600px;
         float: left;
     }
     #formulario{
+        position:fixed;
         border-radius: 25px;
+        margin-left: 62%;
         margin-top: 10px;
         background-color:#404040 ;
         width: 37%;
@@ -396,24 +341,4 @@
     .active {
         background-color: #04AA6D;
     }
-
-
-    table{border-collapse:collapse;}
-    th,tr,td{
-        border:1px solid #000;
-        width:150px;
-        height:45px;
-        vertical-align:middle;
-        text-align:center;
-    }
-    th{
-        color:#fff;
-        background-color: #252525;
-    }
-
-    tr:nth-child(odd) td{
-        background-color:#eee;
-    }
 </style>
-
-
