@@ -1,11 +1,8 @@
 <%@ page import="es.taw.proyecto.dto.RolDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.taw.proyecto.dto.UsuarioDTO" %><%--
-  Created by IntelliJ IDEA.
-  User: casti
-  Date: 05/06/2022
-  Time: 13:37
-  To change this template use File | Settings | File Templates.
+   NAME: Gabriel Castillo
+ Done: 100%
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

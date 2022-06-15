@@ -1,9 +1,6 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: casti
-  Date: 03/06/2022
-  Time: 12:43
-  To change this template use File | Settings | File Templates.
+ NAME: Gabriel Castillo
+ Done: 100%
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

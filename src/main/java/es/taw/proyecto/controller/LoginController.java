@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-
+/*
+ NAME: Gabriel Castillo, Javier Rueda
+ Done: 15%, 85%
+ */
 @Controller
 public class LoginController {
     protected UsuarioService usuarioService;
