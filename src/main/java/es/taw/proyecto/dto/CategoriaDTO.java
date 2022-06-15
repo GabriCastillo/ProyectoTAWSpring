@@ -1,5 +1,8 @@
 package es.taw.proyecto.dto;
-
+/**
+ NAME: Gabriel Castillo
+ Done: 100%
+ */
 public class CategoriaDTO {
     private Integer idCategoria;
     private String tipo;

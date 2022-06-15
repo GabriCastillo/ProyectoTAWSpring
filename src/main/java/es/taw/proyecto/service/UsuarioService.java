@@ -16,7 +16,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ NAME: Gabriel Castillo
+ Done: 40%
+ */
 @Service
 public class UsuarioService {
     protected UsuarioRepository usuarioRepository;

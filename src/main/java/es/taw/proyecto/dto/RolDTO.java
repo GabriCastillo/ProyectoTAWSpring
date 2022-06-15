@@ -1,5 +1,9 @@
 package es.taw.proyecto.dto;
 
+/**
+ NAME: Gabriel Castillo
+ Done: 100%
+ */
 public class RolDTO {
     private Integer idRol;
     private String nombre;

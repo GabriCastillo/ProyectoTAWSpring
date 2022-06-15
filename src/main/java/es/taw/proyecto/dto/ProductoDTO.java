@@ -1,7 +1,10 @@
 package es.taw.proyecto.dto;
 
 import es.taw.proyecto.entity.Usuario;
-
+/**
+ NAME: Gabriel Castillo
+ Done: 100%
+ */
 public class ProductoDTO {
     private Integer idproducto;
     private String titulo;

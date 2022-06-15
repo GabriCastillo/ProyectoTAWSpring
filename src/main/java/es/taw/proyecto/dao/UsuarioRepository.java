@@ -13,6 +13,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ NAME: Gabriel Castillo
+ Done: 100%
+ */
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     public Usuario findUsuarioByNombreAndPassword(String nombre, String password);

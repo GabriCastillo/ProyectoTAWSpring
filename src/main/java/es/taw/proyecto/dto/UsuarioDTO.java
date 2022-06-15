@@ -1,4 +1,9 @@
 package es.taw.proyecto.dto;
+/**
+ NAME: Gabriel Castillo
+ Done: 30%
+ */
+
 
 public class UsuarioDTO {
     private Integer idusuario;

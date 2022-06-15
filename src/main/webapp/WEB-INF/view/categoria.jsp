@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.taw.proyecto.dto.CategoriaDTO" %><%--
-    Author     : casti
-    Done:      : 100%
+     NAME: Gabriel Castillo
+     Done: 100%
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
