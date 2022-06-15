@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+/*
+    Raul Doblas
+    Done:100%
+ */
 @Controller
 @RequestMapping("subastas")
 public class SubastasController {

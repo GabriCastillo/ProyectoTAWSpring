@@ -3,12 +3,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.taw.proyecto.dto.CompradorProductoDTO" %>
 <%@ page import="es.taw.proyecto.dto.CategoriaDTO" %>
-<%@ page import="es.taw.proyecto.dto.ProductoSubastaDTO" %><%--
-  Created by IntelliJ IDEA.
+<%@ page import="es.taw.proyecto.dto.ProductoSubastaDTO" %>
+<%--
   User: Raul Doblas
   Date: 10/06/2022
   Time: 22:48
-  To change this template use File | Settings | File Templates.
+  Done:100%
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
