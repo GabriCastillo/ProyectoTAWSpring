@@ -1,6 +1,7 @@
 /*
     User: Javier
-    Percentage: 100%
+    Percentage: 50%
+    Ruben 50%
  */
 
 package es.taw.proyecto.dao;

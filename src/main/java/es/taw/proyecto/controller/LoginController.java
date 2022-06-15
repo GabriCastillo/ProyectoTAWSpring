@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 /*
- NAME: Gabriel Castillo, Javier Rueda
- Done: 15%, 85%
+ NAME: Ruben ,Gabriel Castillo, Javier Rueda
+ Done: 5%,15%, 80%
  */
 @Controller
 public class LoginController {

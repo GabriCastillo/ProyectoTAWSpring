@@ -1,3 +1,7 @@
+/**
+ NAME: Ruben
+ Done: 50%
+ */
 package es.taw.proyecto.dto;
 
 public class ProductoSubastaDTO {

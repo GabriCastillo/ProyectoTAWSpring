@@ -10,6 +10,8 @@ import java.util.List;
 /**
  NAME: Gabriel Castillo
  Done: 10%
+ NAME: Ruben
+ Done: 25%
  */
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {

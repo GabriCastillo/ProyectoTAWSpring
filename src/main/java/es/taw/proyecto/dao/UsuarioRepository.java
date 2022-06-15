@@ -15,7 +15,9 @@ import java.util.List;
 
 /**
  NAME: Gabriel Castillo
- Done: 100%
+ Done: 90%
+ NAME: Ruben
+ Done: 10%
  */
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
