@@ -1,6 +1,8 @@
 /**
  NAME: Ruben
- Done: 70%
+ Done: 60%
+ NAME: Raul
+ Done: 40%
  */
 package es.taw.proyecto.service;
 
