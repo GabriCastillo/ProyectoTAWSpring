@@ -1,7 +1,4 @@
-/*
-    User: Javier
-    Percentage: 100%
- */
+
 
 package es.taw.proyecto.service;
 
@@ -18,8 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 /**
- NAME: Gabriel Castillo
- Done: 100%
+ NAME: Gabriel Castillo, Javier Rueda
+ Done: 20%, 80%
  */
 @Service
 public class CategoriaService {

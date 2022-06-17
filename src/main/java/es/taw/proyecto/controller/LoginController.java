@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 /*
- NAME: Ruben ,Gabriel Castillo, Javier Rueda
- Done: 5%,15%, 80%
+ NAME: Gabriel Castillo, Javier Rueda
+ Done: 20%, 80%
  */
 @Controller
 public class LoginController {
@@ -47,7 +47,7 @@ public class LoginController {
                 case 2:
                     return "redirect:/Iniciado/";
                 case 3:
-                    return null;
+                    return "redirect:/analista/";
                 case 4:
                     return "redirect:/marketing/";
             }

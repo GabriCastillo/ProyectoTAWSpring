@@ -1,5 +1,8 @@
 package es.taw.proyecto.dao;
-
+/*
+ NAME: Gabriel Castillo
+ Done: 100%
+ */
 import es.taw.proyecto.entity.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

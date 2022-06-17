@@ -2,7 +2,10 @@ package es.taw.proyecto.dto;
 
 import es.taw.proyecto.entity.Producto;
 import es.taw.proyecto.entity.Usuario;
-
+/*
+ NAME: Javier Rueda
+ Done: 100%
+ */
 public class CorreoDTO {
     private Integer idpromo;
     private String mensaje;

@@ -20,10 +20,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 /**
- NAME: Gabriel Castillo
- Done: 10%
- NAME: Ruben
- Done: 10%
+ NAME: Gabriel Castillo, Ruben, Javier Rueda
+ Done: 40%, 10%, 50%
  */
 @Service
 public class ProductoService {

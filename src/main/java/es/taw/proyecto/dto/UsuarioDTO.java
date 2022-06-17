@@ -1,7 +1,7 @@
 package es.taw.proyecto.dto;
 /**
- NAME: Gabriel Castillo
- Done: 30%
+ NAME: Gabriel Castillo, Javier Rueda
+ Done: 30%, 70%
  */
 
 

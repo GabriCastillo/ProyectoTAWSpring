@@ -8,10 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 /**
- NAME: Gabriel Castillo
- Done: 10%
- NAME: Ruben
- Done: 25%
+ NAME: Gabriel Castillo, Ruben, Javier Rueda
+ Done: 10%, 10%, 80%
+
  */
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
